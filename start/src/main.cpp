@@ -10,6 +10,7 @@ wxIMPLEMENT_APP(MyApp);
 class Start_Frame : public wxFrame{
 public:
     Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
+    void OnNewBD(wxCommandEvent& event);
 };
 
 Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxID_ANY, title, wxDefaultPosition, wxSize(800, 700)){     //wxSize - размер окна
@@ -43,6 +44,9 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     tool_bar->AddTool(wxID_DELETE, wxT("Удалить БД"), del);
     tool_bar->Realize();                                                    //добавление панели инструментов на окно
 
+    Bind(wxEVT_MENU, &Start_Frame::OnNewBD, this, wxID_NEW);                //подключение кнопки новая бд
+    Bind(wxEVT_TOOL, &Start_Frame::OnNewBD, this, wxID_NEW);
+    //расположение всего на экране
     wxPanel *main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);   //wxTAB_TRAVERSAL — позволяет переключаться между элементами клавишей Tab
     wxBoxSizer *VStart_Frame = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *HFrame_Control1 = new wxBoxSizer(wxHORIZONTAL);
@@ -63,6 +67,10 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
     main_panel->SetSizer(VStart_Frame);
     main_panel->Layout();
+};
+
+void Start_Frame::OnNewBD(wxCommandEvent& event){
+    
 }
 
 bool MyApp::OnInit(){

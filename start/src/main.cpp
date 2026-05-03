@@ -7,6 +7,70 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
+class Dialog_Create_BD : public wxDialog{
+public:
+    Dialog_Create_BD(wxWindow* parent);         //создание самого диалогового окна
+    wxTextCtrl* m_nameBD;                       //поле для ввода названия
+    wxTextCtrl* m_pathBD;                       //поле для ввода пути к бд
+
+    void OnOk(wxCommandEvent& event);           //отработка кнопки создать
+    void OnBack(wxCommandEvent& event);         //отработка кнопки отмена
+    void OnBrowse(wxCommandEvent& evenr);       //отработка кнопки обзор для выбора пути 
+};
+
+Dialog_Create_BD::Dialog_Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 200)){
+    wxPanel* panel = new wxPanel(this, wxID_ANY);
+    wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* name_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* path_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    wxStaticText* name_label = new wxStaticText(panel, wxID_ANY, wxT("введите название бд:"));
+    m_nameBD = new wxTextCtrl(panel, wxID_ANY, wxT("новая база"));
+    name_sizer->Add(name_label);
+    name_sizer->Add(m_nameBD);
+
+    wxStaticText* path_lable = new wxStaticText(panel, wxID_ANY, wxT("выберете путь:"));
+    m_pathBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());                                         //wxGetCwd() возвращает текущий рабочий каталог
+    wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
+    browse_btn->Bind(wxEVT_BUTTON, &Dialog_Create_BD::OnBrowse, this);
+    path_sizer->Add(path_lable);
+    path_sizer->Add(m_pathBD);
+    path_sizer->Add(browse_btn);
+
+    wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("создать"));
+    wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
+    btn_sizer->Add(ok_btn);
+    btn_sizer->Add(cancel_btn);
+
+    main_sizer->Add(name_sizer);
+    main_sizer->Add(path_sizer);
+    main_sizer->Add(btn_sizer);
+
+    panel->SetSizer(main_sizer);
+};
+
+void Dialog_Create_BD::OnBrowse(wxCommandEvent& event){                                             //Открывает диалог выбора папки (wxDirDialog) Начальный путь — текущее значение из поля пути Если пользователь выбрал папку (нажал OK), обновляет поле пути
+    wxDirDialog dlg(this, "Выберите папку для сохранения базы данных", m_pathBD->GetValue());
+    if (dlg.ShowModal() == wxID_OK){
+        m_pathBD->SetValue(dlg.GetPath());
+    }
+};
+
+void Dialog_Create_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
+    wxString dbName = m_nameBD->GetValue();   // читаем название
+    wxString dbPath = m_pathBD->GetValue();   // читаем путь
+    
+    if(dbName.IsEmpty()){
+        wxMessageBox("Введите название базы данных!", "Ошибка", wxOK | wxICON_ERROR);
+        return;
+    }
+    
+    wxMessageBox(wxString::Format("База данных '%s' создана в папке '%s'", dbName, dbPath), "Успех", wxOK);
+    
+    EndModal(wxID_OK);
+};
+
 class Start_Frame : public wxFrame{
 public:
     Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
@@ -70,7 +134,10 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 };
 
 void Start_Frame::OnNewBD(wxCommandEvent& event){
-    
+    Dialog_Create_BD dlg(this);                     // создаём диалог
+    if(dlg.ShowModal() == wxID_OK){                 // показываем его
+        SetStatusText("База данных создана");       // обновляем статус
+    }
 }
 
 bool MyApp::OnInit(){

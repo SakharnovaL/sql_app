@@ -42,6 +42,27 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     tool_bar->AddTool(wxID_EDIT, wxT("Редактировать БД"), edit);
     tool_bar->AddTool(wxID_DELETE, wxT("Удалить БД"), del);
     tool_bar->Realize();                                                    //добавление панели инструментов на окно
+
+    wxPanel *main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);   //wxTAB_TRAVERSAL — позволяет переключаться между элементами клавишей Tab
+    wxBoxSizer *VStart_Frame = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer *HFrame_Control1 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *HFrame_Control2 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *HFrame_Control3 = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer *HFrame_Control4 = new wxBoxSizer(wxHORIZONTAL);
+
+    wxButton* btn_find = new wxButton(main_panel, wxID_ANY, wxT("Найти"));
+    wxButton* btn_clear = new wxButton(main_panel, wxID_ANY, wxT("Сброс"));
+
+    HFrame_Control2->Add(btn_find);
+    HFrame_Control2->Add(btn_clear);
+
+    VStart_Frame->Add(HFrame_Control1);
+    VStart_Frame->Add(HFrame_Control2);
+    VStart_Frame->Add(HFrame_Control3);
+    VStart_Frame->Add(HFrame_Control4);
+
+    main_panel->SetSizer(VStart_Frame);
+    main_panel->Layout();
 }
 
 bool MyApp::OnInit(){

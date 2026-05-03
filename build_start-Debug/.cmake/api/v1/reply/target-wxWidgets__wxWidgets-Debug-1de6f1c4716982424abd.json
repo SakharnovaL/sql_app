@@ -1,0 +1,165 @@
+{
+	"abstract" : true,
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"find_package",
+			"target_link_libraries"
+		],
+		"files" : 
+		[
+			"C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 4,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 1189,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 1190,
+				"parent" : 2
+			}
+		]
+	},
+	"codemodelVersion" : 
+	{
+		"major" : 2,
+		"minor" : 10
+	},
+	"id" : "wxWidgets::wxWidgets::@6890427a1f51a3e7e1df",
+	"imported" : true,
+	"interfaceLinkLibraries" : 
+	[
+		{
+			"backtrace" : 4,
+			"fragment" : "C:/dev/wx/lib/gcc_x64_dll/libwxbase33ud_net.a"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "C:/dev/wx/lib/gcc_x64_dll/libwxmsw33ud_core.a"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "C:/dev/wx/lib/gcc_x64_dll/libwxbase33ud.a"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "kernel32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "user32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "gdi32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "gdiplus"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "msimg32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "comdlg32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "winspool"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "winmm"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "shell32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "shlwapi"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "comctl32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "ole32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "oleaut32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "uuid"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "rpcrt4"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "advapi32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "version"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "ws2_32"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "wininet"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "oleacc"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "uxtheme"
+		},
+		{
+			"backtrace" : 4,
+			"fragment" : "wsock32"
+		}
+	],
+	"local" : true,
+	"name" : "wxWidgets::wxWidgets",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sources" : [],
+	"type" : "INTERFACE_LIBRARY"
+}

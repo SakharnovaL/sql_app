@@ -1,0 +1,3 @@
+C:/devel/build_start-Debug/CMakeFiles/Start.dir
+C:/devel/build_start-Debug/CMakeFiles/edit_cache.dir
+C:/devel/build_start-Debug/CMakeFiles/rebuild_cache.dir

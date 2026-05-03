@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.20.0)
+project(Start VERSION 0.1.0)
+
+find_package(wxWidgets REQUIRED COMPONENTS net core base)
+include(${wxWidgets_USE_FILE})
+
+file(GLOB project
+     src/*
+)
+
+add_executable(Start ${project})
+
+target_link_libraries(Start ${wxWidgets_LIBRARIES})
+target_include_directories(Start PRIVATE ${wxWidgets_INCLUDE_DIRS})

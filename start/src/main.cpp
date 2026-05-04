@@ -20,20 +20,20 @@ public:
 
 Dialog_Create_BD::Dialog_Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
-    wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
-    wxBoxSizer* name_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* path_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);                                            //создание общего бокса куда запихаем все состовляющие окна
+    wxBoxSizer* name_sizer = new wxBoxSizer(wxHORIZONTAL);                                          //бокс для отдела связанного с заведением названия бд
+    wxBoxSizer* path_sizer = new wxBoxSizer(wxHORIZONTAL);                                          //бокс для отдела связанного с выбором пути, где валяется бд
+    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);                                           //бокс для кнопочек
 
-    wxStaticText* name_label = new wxStaticText(panel, wxID_ANY, wxT("введите название бд:"));
-    m_nameBD = new wxTextCtrl(panel, wxID_ANY, wxT("новая база"));
+    wxStaticText* name_label = new wxStaticText(panel, wxID_ANY, wxT("введите название бд:"));      //статичный текст 
+    m_nameBD = new wxTextCtrl(panel, wxID_ANY, wxT("новая база"));                                  //поле куда можно ввести название бд, по умолчанию - новая база
     name_sizer->Add(name_label);
     name_sizer->Add(m_nameBD);
 
-    wxStaticText* path_lable = new wxStaticText(panel, wxID_ANY, wxT("выберете путь:"));
-    m_pathBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());                                         //wxGetCwd() возвращает текущий рабочий каталог
+    wxStaticText* path_lable = new wxStaticText(panel, wxID_ANY, wxT("выберете путь:"));            //статичный текст
+    m_pathBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());                                         //поле куда можно вписать путь бд, wxGetCwd() возвращает текущий рабочий каталог - значение по умолчанию
     wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
-    browse_btn->Bind(wxEVT_BUTTON, &Dialog_Create_BD::OnBrowse, this);
+    browse_btn->Bind(wxEVT_BUTTON, &Dialog_Create_BD::OnBrowse, this);                              //подключение кнопки, она очень волшебная, я хуй знает как она работает
     path_sizer->Add(path_lable);
     path_sizer->Add(m_pathBD);
     path_sizer->Add(browse_btn);

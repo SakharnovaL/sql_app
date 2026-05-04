@@ -74,6 +74,7 @@ void Dialog_Create_BD::OnOk(wxCommandEvent& event){                             
 class Start_Frame : public wxFrame{
 public:
     Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
+    wxTextCtrl* m_findBD;
     void OnNewBD(wxCommandEvent& event);
 };
 
@@ -84,6 +85,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     file_menu->Append(wxID_ANY, _T("&Test\tAlt-T"), _T("Test"));            //добавляет во вкладку файл пункт тест с горячей клавишей Alt + T
     file_menu->Append(wxID_EXIT);
     about_menu->Append(wxID_ABOUT);
+    
     wxMenuBar *menu_bar = new wxMenuBar();                                  //создаём саму строчку с объектами
 	menu_bar->Append(file_menu, wxT("&Файл"));	                            //добавляем объект файл
     menu_bar->Append(edit_menu,wxT("&Правка"));                             //добавляем объект правка
@@ -118,11 +120,27 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     wxBoxSizer *HFrame_Control3 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer *HFrame_Control4 = new wxBoxSizer(wxHORIZONTAL);
 
+    wxStaticText* cur_label = new wxStaticText(main_panel, wxID_ANY, wxT("текущая база данных"));
+    HFrame_Control1->Add(cur_label);
+
+    wxStaticText* name_label = new wxStaticText(main_panel, wxID_ANY, wxT("поиск"));
+    m_findBD = new wxTextCtrl(main_panel, wxID_ANY);
     wxButton* btn_find = new wxButton(main_panel, wxID_ANY, wxT("Найти"));
     wxButton* btn_clear = new wxButton(main_panel, wxID_ANY, wxT("Сброс"));
-
+    HFrame_Control2->Add(name_label);
+    HFrame_Control2->Add(m_findBD);
     HFrame_Control2->Add(btn_find);
     HFrame_Control2->Add(btn_clear);
+
+    wxButton* btn_plus = new wxButton(main_panel, wxID_ANY, wxT("добавить"));
+    wxButton* btn_edit = new wxButton(main_panel, wxID_ANY, wxT("редактировать"));
+    wxButton* btn_del = new wxButton(main_panel, wxID_ANY, wxT("удалить"));
+    wxButton* btn_reset = new wxButton(main_panel, wxID_ANY, wxT("обновить"));
+
+    HFrame_Control4->Add(btn_plus);
+    HFrame_Control4->Add(btn_edit);
+    HFrame_Control4->Add(btn_del);
+    HFrame_Control4->Add(btn_reset);
 
     VStart_Frame->Add(HFrame_Control1);
     VStart_Frame->Add(HFrame_Control2);

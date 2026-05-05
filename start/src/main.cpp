@@ -7,6 +7,74 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
+class Open_BD : public wxDialog{
+public:
+    Open_BD(wxWindow* parent);
+    wxTextCtrl* m_chooseBD;
+
+    void OnOk(wxCommandEvent& event);
+    //void OnBack(wxCommandEvent& event);
+    void OnBrowse(wxCommandEvent& event);
+};
+
+
+Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("открыть базу данных"), wxDefaultPosition, wxSize(400, 200)){
+    wxPanel* panel = new wxPanel(this, wxID_ANY);
+    wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* text_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* last_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* choose_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* info_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    wxStaticText* text_label = new wxStaticText(panel, wxID_ANY, wxT("выберете базу данных для открытия"));
+    text_sizer->Add(text_label);                                                                                //надо сделать посередине окна
+
+    wxStaticText* last_label = new wxStaticText(panel, wxID_ANY, wxT("последние баззы данных"));                //надо добавить окно с последними выбранными бд
+    last_sizer->Add(last_label);
+
+    wxStaticText* choose_label = new wxStaticText(panel, wxID_ANY, wxT("или выберете файл"));
+    m_chooseBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());
+    wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
+    browse_btn->Bind(wxEVT_BUTTON, &Open_BD::OnBrowse, this);
+    choose_sizer->Add(choose_label);
+    choose_sizer->Add(m_chooseBD);
+    choose_sizer->Add(browse_btn);
+    //надо добавить прямоугольник с инфой о выбранной бд (имя, размер, создана, записей)
+    wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("открыть"));
+    wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
+    btn_sizer->Add(ok_btn);
+    btn_sizer->Add(cancel_btn);
+
+    main_sizer->Add(text_sizer);
+    main_sizer->Add(last_sizer);
+    main_sizer->Add(choose_sizer);
+    main_sizer->Add(info_sizer);
+    main_sizer->Add(btn_sizer);
+
+    panel->SetSizer(main_sizer);
+};
+
+void Open_BD::OnBrowse(wxCommandEvent& event){                                             //Открывает диалог выбора папки (wxDirDialog) Начальный путь — текущее значение из поля пути Если пользователь выбрал папку (нажал OK), обновляет поле пути
+    wxDirDialog dlg(this, "Выберите папку для сохранения базы данных", m_chooseBD->GetValue());
+    if (dlg.ShowModal() == wxID_OK){
+        m_chooseBD->SetValue(dlg.GetPath());
+    }
+};
+
+void Open_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
+    wxString dbPath = m_chooseBD->GetValue();   // читаем путь
+    
+    if(dbPath.IsEmpty()){
+        wxMessageBox("Введите путь базы данных!", "Ошибка", wxOK | wxICON_ERROR);
+        return;
+    }
+    
+    wxMessageBox(wxString::Format("Открыта база данных создана из папки '%s'", dbPath), "Успех", wxOK);
+    
+    EndModal(wxID_OK);
+};
+
 class Dialog_Create_BD : public wxDialog{
 public:
     Dialog_Create_BD(wxWindow* parent);         //создание самого диалогового окна
@@ -14,7 +82,7 @@ public:
     wxTextCtrl* m_pathBD;                       //поле для ввода пути к бд
 
     void OnOk(wxCommandEvent& event);           //отработка кнопки создать
-    void OnBack(wxCommandEvent& event);         //отработка кнопки отмена
+    //void OnBack(wxCommandEvent& event);         //отработка кнопки отмена
     void OnBrowse(wxCommandEvent& evenr);       //отработка кнопки обзор для выбора пути 
 };
 
@@ -76,6 +144,7 @@ public:
     Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
     wxTextCtrl* m_findBD;
     void OnNewBD(wxCommandEvent& event);
+    void OnOpenBD(wxCommandEvent& event);
 };
 
 Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxID_ANY, title, wxDefaultPosition, wxSize(800, 700)){     //wxSize - размер окна
@@ -112,6 +181,9 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
     Bind(wxEVT_MENU, &Start_Frame::OnNewBD, this, wxID_NEW);                //подключение кнопки новая бд
     Bind(wxEVT_TOOL, &Start_Frame::OnNewBD, this, wxID_NEW);
+
+    Bind(wxEVT_MENU, &Start_Frame::OnOpenBD, this, wxID_OPEN);              //подключение кнопки открыть бд
+    Bind(wxEVT_TOOL, &Start_Frame::OnOpenBD, this, wxID_OPEN);
     //расположение всего на экране
     wxPanel *main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);   //wxTAB_TRAVERSAL — позволяет переключаться между элементами клавишей Tab
     wxBoxSizer *VStart_Frame = new wxBoxSizer(wxVERTICAL);
@@ -153,6 +225,13 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
 void Start_Frame::OnNewBD(wxCommandEvent& event){
     Dialog_Create_BD dlg(this);                     // создаём диалог
+    if(dlg.ShowModal() == wxID_OK){                 // показываем его
+        SetStatusText("База данных создана");       // обновляем статус
+    }
+}
+
+void Start_Frame::OnOpenBD(wxCommandEvent& event){
+    Open_BD dlg(this);                              // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
         SetStatusText("База данных создана");       // обновляем статус
     }

@@ -8,7 +8,8 @@ file(GLOB project
      src/*
 )
 
-add_executable(Start ${project})
+add_executable(Start ${project}
+     src/main.h)
 
 target_link_libraries(Start ${wxWidgets_LIBRARIES})
 target_include_directories(Start PRIVATE ${wxWidgets_INCLUDE_DIRS})

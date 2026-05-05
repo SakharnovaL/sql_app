@@ -1,16 +1,5 @@
 #include <wx/wx.h>
-
-class MyApp : public wxApp{
-public:
-    virtual bool OnInit();
-};
-
-wxIMPLEMENT_APP(MyApp);
-
-class Del_BD : public wxDialog{
-public:
-    Del_BD(wxWindow* parent);
-};
+#include "main.h"
 
 Del_BD::Del_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -41,16 +30,6 @@ Del_BD::Del_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("подтве�
     main_sizer->Add(btn_sizer);
     
     panel->SetSizer(main_sizer);
-};
-
-class Edit_BD : public wxDialog{
-public:
-    Edit_BD(wxWindow* parent);
-    wxTextCtrl* m_name;
-    wxTextCtrl* m_meaning;
-    wxTextCtrl* m_discribe;
-
-    void OnOk(wxCommandEvent& event);
 };
 
 Edit_BD::Edit_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("редактирование записи"), wxDefaultPosition, wxSize(400, 200)){
@@ -155,16 +134,6 @@ void Edit_BD::OnOk(wxCommandEvent& event){                                      
     EndModal(wxID_OK);
 };
 
-class Add_new_BD : public wxDialog{
-public:
-    Add_new_BD(wxWindow* parent);
-    wxTextCtrl* m_name;
-    wxTextCtrl* m_meaning;
-    wxTextCtrl* m_discribe;
-
-    void OnOk(wxCommandEvent& event);
-};
-
 Add_new_BD::Add_new_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("добавление новой записи"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
@@ -265,16 +234,6 @@ void Add_new_BD::OnOk(wxCommandEvent& event){                                   
     EndModal(wxID_OK);
 };
 
-class Open_BD : public wxDialog{
-public:
-    Open_BD(wxWindow* parent);
-    wxTextCtrl* m_chooseBD;
-
-    void OnOk(wxCommandEvent& event);
-    //void OnBack(wxCommandEvent& event);
-    void OnBrowse(wxCommandEvent& event);
-};
-
 Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("открыть базу данных"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
@@ -332,17 +291,6 @@ void Open_BD::OnOk(wxCommandEvent& event){                                      
     EndModal(wxID_OK);
 };
 
-class Dialog_Create_BD : public wxDialog{
-public:
-    Dialog_Create_BD(wxWindow* parent);         //создание самого диалогового окна
-    wxTextCtrl* m_nameBD;                       //поле для ввода названия
-    wxTextCtrl* m_pathBD;                       //поле для ввода пути к бд
-
-    void OnOk(wxCommandEvent& event);           //отработка кнопки создать
-    //void OnBack(wxCommandEvent& event);         //отработка кнопки отмена
-    void OnBrowse(wxCommandEvent& evenr);       //отработка кнопки обзор для выбора пути 
-};
-
 Dialog_Create_BD::Dialog_Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);                                            //создание общего бокса куда запихаем все состовляющие окна
@@ -394,17 +342,6 @@ void Dialog_Create_BD::OnOk(wxCommandEvent& event){                             
     wxMessageBox(wxString::Format("База данных '%s' создана в папке '%s'", dbName, dbPath), "Успех", wxOK);
     
     EndModal(wxID_OK);
-};
-
-class Start_Frame : public wxFrame{
-public:
-    Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
-    wxTextCtrl* m_findBD;
-    void OnNewBD(wxCommandEvent& event);
-    void OnOpenBD(wxCommandEvent& event);
-    void OnAddNewBD(wxCommandEvent& event);
-    void OnEditBD(wxCommandEvent& event);
-    void OnDelBd(wxCommandEvent& event);
 };
 
 Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxID_ANY, title, wxDefaultPosition, wxSize(800, 700)){     //wxSize - размер окна

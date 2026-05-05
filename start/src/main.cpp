@@ -7,6 +7,42 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
+class Del_BD : public wxDialog{
+public:
+    Del_BD(wxWindow* parent);
+};
+
+Del_BD::Del_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)){
+    wxPanel* panel = new wxPanel(this, wxID_ANY);
+
+    wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
+    wxBoxSizer* war_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* quest_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* info_sizer = new wxBoxSizer(wxHORIZONTAL);
+    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
+
+    wxStaticText* war_label = new wxStaticText(panel, wxID_ANY, wxT("ВНИМАНИЕ!!!"));
+    war_sizer->Add(war_label);
+
+    wxStaticText* quest_label = new wxStaticText(panel, wxID_ANY, wxT("Вы действительно хотите удалить запись"));       //надо добавить название записи
+    quest_sizer->Add(quest_label);
+
+    wxStaticText* info_label = new wxStaticText(panel, wxID_ANY, wxT("это действие нельзя отменить"));
+    info_sizer->Add(info_label);
+    
+    wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("да, удалить"));
+    wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
+    btn_sizer->Add(ok_btn);
+    btn_sizer->Add(cancel_btn);
+
+    main_sizer->Add(war_sizer);
+    main_sizer->Add(quest_sizer);
+    main_sizer->Add(info_sizer);
+    main_sizer->Add(btn_sizer);
+    
+    panel->SetSizer(main_sizer);
+};
+
 class Edit_BD : public wxDialog{
 public:
     Edit_BD(wxWindow* parent);
@@ -368,6 +404,7 @@ public:
     void OnOpenBD(wxCommandEvent& event);
     void OnAddNewBD(wxCommandEvent& event);
     void OnEditBD(wxCommandEvent& event);
+    void OnDelBd(wxCommandEvent& event);
 };
 
 Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxID_ANY, title, wxDefaultPosition, wxSize(800, 700)){     //wxSize - размер окна
@@ -413,7 +450,10 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
     Bind(wxEVT_MENU, &Start_Frame::OnEditBD, this, wxID_EDIT);              //подключение кнопки открыть бд
     Bind(wxEVT_TOOL, &Start_Frame::OnEditBD, this, wxID_EDIT);
-    //расположение всего на экране
+
+    Bind(wxEVT_MENU, &Start_Frame::OnDelBd, this, wxID_DELETE);              //подключение кнопки открыть бд
+    Bind(wxEVT_TOOL, &Start_Frame::OnDelBd, this, wxID_DELETE);
+    //расположение всего на экране 
     wxPanel *main_panel = new wxPanel(this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL);   //wxTAB_TRAVERSAL — позволяет переключаться между элементами клавишей Tab
     wxBoxSizer *VStart_Frame = new wxBoxSizer(wxVERTICAL);
     wxBoxSizer *HFrame_Control1 = new wxBoxSizer(wxHORIZONTAL);
@@ -475,6 +515,13 @@ void Start_Frame::OnAddNewBD(wxCommandEvent& event){
 
 void Start_Frame::OnEditBD(wxCommandEvent& event){
     Edit_BD dlg(this);                     // создаём диалог
+    if(dlg.ShowModal() == wxID_OK){                 // показываем его
+        SetStatusText("База данных создана");       // обновляем статус
+    }
+}
+
+void Start_Frame::OnDelBd(wxCommandEvent& event){
+    Del_BD dlg(this);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
         SetStatusText("База данных создана");       // обновляем статус
     }

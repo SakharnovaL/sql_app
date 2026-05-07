@@ -239,42 +239,47 @@ void Add_new_BD::OnOk(wxCommandEvent& event){                                   
     EndModal(wxID_OK);
 };
 
-Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("открыть базу данных"), wxDefaultPosition, wxSize(400, 200)){
+Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("открыть базу данных"), wxDefaultPosition, wxSize(500, 400)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
+
     wxBoxSizer* text_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* last_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* choose_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* info_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
-
     wxStaticText* text_label = new wxStaticText(panel, wxID_ANY, wxT("выберете базу данных для открытия"));
-    text_sizer->Add(text_label);                                                                                //надо сделать посередине окна
+    text_sizer->AddStretchSpacer();
+    text_sizer->Add(text_label, 0, wxALIGN_CENTER);                                                                                //надо сделать посередине окна
+    text_sizer->AddStretchSpacer();
+    main_sizer->Add(text_sizer, 0, wxALL | wxEXPAND, 10);
 
+    wxBoxSizer* last_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* last_label = new wxStaticText(panel, wxID_ANY, wxT("последние баззы данных"));                //надо добавить окно с последними выбранными бд
-    last_sizer->Add(last_label);
+    last_sizer->Add(last_label, 0, wxLEFT | wxBOTTOM, 5);
+    main_sizer->Add(last_sizer, 0, wxALL | wxEXPAND, 10);
 
+    wxBoxSizer* choose_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* choose_label = new wxStaticText(panel, wxID_ANY, wxT("или выберете файл"));
     m_chooseBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());
     wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
     browse_btn->Bind(wxEVT_BUTTON, &Open_BD::OnBrowse, this);
-    choose_sizer->Add(choose_label);
-    choose_sizer->Add(m_chooseBD);
-    choose_sizer->Add(browse_btn);
+    choose_sizer->Add(choose_label, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
+    choose_sizer->Add(m_chooseBD, 1, wxRIGHT | wxEXPAND, 5);
+    choose_sizer->Add(browse_btn, 0);
+    main_sizer->Add(choose_sizer, 0, wxALL | wxEXPAND, 10);
     
-    m_info = new wxStaticText(panel, wxID_ANY, wxT("информация о бд"));
-    info_sizer->Add(m_info);
+    m_info = new wxStaticText(panel, wxID_ANY, wxT("информация о бд появится здесь"));
+    wxStaticBox* info_box = new wxStaticBox(panel, wxID_ANY, wxT("информация о бд"));
+    wxStaticBoxSizer* info_sizer = new wxStaticBoxSizer(info_box, wxVERTICAL);
+    info_sizer->Add(m_info, 1, wxLEFT | wxEXPAND, 10);
+    main_sizer->Add(info_sizer, 1, wxALL | wxEXPAND, 10);
 
+    main_sizer->AddStretchSpacer();
+
+    wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("открыть"));
     wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
-    btn_sizer->Add(ok_btn);
-    btn_sizer->Add(cancel_btn);
-
-    main_sizer->Add(text_sizer);
-    main_sizer->Add(last_sizer);
-    main_sizer->Add(choose_sizer);
-    main_sizer->Add(info_sizer);
-    main_sizer->Add(btn_sizer);
+    btn_sizer->AddStretchSpacer();
+    btn_sizer->Add(ok_btn, 0, wxRight, 5);
+    btn_sizer->Add(cancel_btn, 0);
+    main_sizer->Add(btn_sizer, 0, wxALL | wxEXPAND, 10);
 
     panel->SetSizer(main_sizer);
 };
@@ -291,7 +296,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
             info += wxT("имя: ") + fileInfo.GetFullName() + "\n";
             info += wxT("путь: ") + fileInfo.GetFullPath() + "\n";
             info += wxT("размер: ") + wxString::Format("%.2f KB", fileInfo.GetSize().GetValue() / 1024.0) + "\n";
-            info += wxT("создана: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S");
+            info += wxT("создана: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S") + "\n";
 
             sqlite3* bd = nullptr;
             if(sqlite3_open(file.ToUTF8(), &bd) == SQLITE_OK){      //открываем бд
@@ -304,7 +309,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
                     sqlite3_finalize(stmt);                         //очищает подготовленный запрос, чтоб программа не умерла
                 }
                 sqlite3_close(bd);
-                info += "\nтаблиц: " + wxString::Format("%d", table_cnt);
+                info += wxT("таблиц: ") + wxString::Format("%d", table_cnt);
             }
             m_info->SetLabel(info);
         }
@@ -548,7 +553,7 @@ void Start_Frame::LoadTables(){
     }
 
     char* err_msg = nullptr;
-    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table';", GetTablesCallback, m_table_choice, &err_msg);
+    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table';", GetTablesCallback, m_table_choice, &err_msg);         //вызывает GetTablesCallback для каждой найденной таблицы
 
     if(rc != SQLITE_OK){
         wxMessageBox(wxString::FromUTF8(err_msg), wxT("ошибка"), wxOK | wxICON_ERROR);
@@ -556,8 +561,8 @@ void Start_Frame::LoadTables(){
     }
 
     if(m_table_choice->GetCount() > 0){
-        m_table_choice->SetSelection(0);
-        LoadTableData(m_table_choice->GetString(0));
+        m_table_choice->SetSelection(0);                        //выбираем первую
+        LoadTableData(m_table_choice->GetString(0));            //выгружаем ее данные
     }
 }
 

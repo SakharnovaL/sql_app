@@ -537,4 +537,8 @@ CMakeFiles/Start.dir/src/main.cpp.obj: C:\devel\start\src\main.cpp \
  C:/dev/wx/include/wx/textdlg.h C:/dev/wx/include/wx/generic/textdlgg.h \
  C:/dev/wx/include/wx/valtext.h C:/dev/wx/include/wx/filedlg.h \
  C:/dev/wx/include/wx/msw/filedlg.h C:/dev/wx/include/wx/mdi.h \
- C:/dev/wx/include/wx/msw/mdi.h C:\devel\start\src\main.h
+ C:/dev/wx/include/wx/msw/mdi.h C:/msys64/ucrt64/include/sqlite3.h \
+ C:\devel\start\src\main.h C:/dev/wx/include/wx/listctrl.h \
+ C:/dev/wx/include/wx/listbase.h C:/dev/wx/include/wx/itemattr.h \
+ C:/dev/wx/include/wx/systhemectrl.h C:/dev/wx/include/wx/withimages.h \
+ C:/dev/wx/include/wx/msw/listctrl.h

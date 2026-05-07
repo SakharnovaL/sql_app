@@ -1,5 +1,9 @@
 #include <wx/wx.h>
+#include "sqlite3.h"
+#include <iostream>
+#include <vector>
 #include "main.h"
+#include <wx/listctrl.h>
 
 Del_BD::Del_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -468,4 +472,29 @@ bool MyApp::OnInit(){
     Start_Frame* frame = new Start_Frame(NULL);          
     frame->Show(true);
     return true;
+}
+
+static int get_col_callback(void* data, int arg_c, char** arg_v, char** az_col_name){
+    std::vector<wxString>* col = static_cast<std::vector<wxString>*>(data);      //принудительно приводим к типу данных, В круглых скобках — значение value, в угловых скобках — тип type.
+    if(arg_c > 1 && arg_v[1]){
+        col->push_back(wxString::FromUTF8(arg_v[1]));                            //FromUTF8 преобразует с-строку в объект wxString, 1 возвращает имя колонки
+    }
+    return 0;
+}
+
+void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то принимать с клавы*/){
+    if(m_bd == nullptr){
+        return;
+    }
+
+    m_list->ClearAll();
+    //char* escaped = sqlite3_mprintf("%w", tableName.ToUTF8());        для ввода пользователем, надо кудато присобачить
+    wxString col_tab = wxString::Format("PRAGMA table_info(%s);", table_name);      //sql запрос, format - принимает строку как printf в с, PRAGMA table_info передает название колонки и какой тип данных в нем хранится и еще какую-то парашу, которая мне не особо нужна
+    std::vector<wxString> col;
+    sqlite3_exec(m_bd, col_tab.ToUTF8(), get_col_callback, &col, nullptr);          //заполняется вектор col названиями столбцов бд
+    
+    for(size_t i = 0; i < col.size(); i++){                                         //size_t нужен для правильного сравнения размеров
+        m_list->InsertColumn(i, col[i]);
+        m_list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);                       //ширина всего столбца такая, чтоб полностью влезало название столбца
+    }
 }

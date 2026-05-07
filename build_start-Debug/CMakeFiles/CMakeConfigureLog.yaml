@@ -6033,3 +6033,1137 @@ events:
         - "C:/Program Files/CMake"
         - "C:/Program Files (x86)/Start"
 ...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake:517 (find_program)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindSQLite3.cmake:78 (find_package)"
+      - "CMakeLists.txt:7 (find_package)"
+    mode: "program"
+    variable: "PKG_CONFIG_EXECUTABLE"
+    description: "pkg-config executable"
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "pkg-config.bat"
+      - "pkg-config"
+      - "pkgconf"
+    candidate_directories:
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/msys64/usr/bin/"
+      - "C:/Windows/System32/HWAudioDriver/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/dev/wx/lib/gcc_x64_dll/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+      - "C:/Users/l.sakharnova/.dotnet/tools/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/msys64/ucrt64/sbin/"
+      - "C:/msys64/ucrt64/"
+      - "C:/Program Files/bin/"
+      - "C:/Program Files/sbin/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/bin/"
+      - "C:/Program Files (x86)/sbin/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/Program Files/CMake/sbin/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/Start/bin/"
+      - "C:/Program Files (x86)/Start/sbin/"
+      - "C:/Program Files (x86)/Start/"
+    searched_directories:
+      - "C:/msys64/ucrt64/bin/pkg-config.bat.com"
+      - "C:/msys64/ucrt64/bin/pkg-config.bat.exe"
+      - "C:/msys64/ucrt64/bin/pkg-config.bat"
+      - "C:/msys64/ucrt64/bin/pkg-config.com"
+    found: "C:/msys64/ucrt64/bin/pkg-config.exe"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake:761 (find_library)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake:811 (_pkg_find_libs)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake:1149 (_pkg_recalculate)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake:1166 (_pkg_check_modules_internal)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindSQLite3.cmake:80 (pkg_check_modules)"
+      - "CMakeLists.txt:7 (find_package)"
+    mode: "library"
+    variable: "pkgcfg_lib_PC_SQLite3_sqlite3"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "sqlite3"
+    candidate_directories:
+      - "C:/msys64/ucrt64/lib/"
+    found: "C:/msys64/ucrt64/lib/libsqlite3.dll.a"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "C:/Program Files (x86)/Start/bin"
+        - "C:/Program Files/CMake/bin"
+        - "/bin"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindSQLite3.cmake:84 (find_path)"
+      - "CMakeLists.txt:7 (find_package)"
+    mode: "path"
+    variable: "SQLite3_INCLUDE_DIR"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "sqlite3.h"
+    candidate_directories:
+      - "C:/msys64/ucrt64/include/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/msys64/usr/bin/"
+      - "C:/Windows/System32/HWAudioDriver/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/dev/wx/lib/gcc_x64_dll/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+      - "C:/Users/l.sakharnova/.dotnet/tools/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/msys64/ucrt64/include/"
+      - "C:/msys64/ucrt64/"
+      - "C:/Program Files/include/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/include/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/include/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/Start/include/"
+      - "C:/Program Files (x86)/Start/"
+    found: "C:/msys64/ucrt64/include/"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindSQLite3.cmake:91 (find_library)"
+      - "CMakeLists.txt:7 (find_package)"
+    mode: "library"
+    variable: "SQLite3_LIBRARY"
+    description: "Path to a library."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "sqlite3"
+      - "sqlite"
+    candidate_directories:
+      - "C:/msys64/ucrt64/lib/"
+      - "C:/msys64/ucrt64/bin/"
+      - "C:/msys64/usr/bin/"
+      - "C:/Windows/System32/HWAudioDriver/"
+      - "C:/Windows/System32/"
+      - "C:/Windows/"
+      - "C:/Windows/System32/wbem/"
+      - "C:/Windows/System32/WindowsPowerShell/v1.0/"
+      - "C:/Windows/System32/OpenSSH/"
+      - "C:/Windows/System32/config/systemprofile/AppData/Local/Microsoft/WindowsApps/"
+      - "C:/Program Files/dotnet/"
+      - "C:/Program Files/CMake/bin/"
+      - "C:/ProgramData/chocolatey/bin/"
+      - "C:/Program Files/Git/cmd/"
+      - "C:/dev/wx/lib/gcc_x64_dll/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+      - "C:/Users/l.sakharnova/.dotnet/tools/"
+      - "C:/Users/l.sakharnova/AppData/Local/Programs/Microsoft VS Code/bin/"
+      - "C:/msys64/ucrt64/lib/"
+      - "C:/msys64/ucrt64/"
+      - "C:/Program Files/lib/"
+      - "C:/Program Files/"
+      - "C:/Program Files (x86)/lib/"
+      - "C:/Program Files (x86)/"
+      - "C:/Program Files/CMake/lib/"
+      - "C:/Program Files/CMake/"
+      - "C:/Program Files (x86)/Start/lib/"
+      - "C:/Program Files (x86)/Start/"
+      - "C:/Program Files (x86)/Start/bin/"
+      - "/bin/"
+    found: "C:/msys64/ucrt64/lib/libsqlite3.dll.a"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_LIBRARY_PATH:
+        - "C:/Program Files (x86)/Start/bin"
+        - "C:/Program Files/CMake/bin"
+        - "/bin"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...
+
+---
+events:
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:828 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+  -
+    kind: "find-v1"
+    backtrace:
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:374 (find_file)"
+      - "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake:1157 (wx_extract_version)"
+      - "CMakeLists.txt:4 (find_package)"
+    mode: "file"
+    variable: "_wx_filename"
+    description: "Path to a file."
+    settings:
+      SearchFramework: "NEVER"
+      SearchAppBundle: "NEVER"
+      CMAKE_FIND_USE_CMAKE_PATH: true
+      CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: true
+      CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: true
+      CMAKE_FIND_USE_INSTALL_PREFIX: true
+    names:
+      - "wx/version.h"
+    candidate_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/"
+      - "C:/dev/wx/include/"
+    searched_directories:
+      - "C:/dev/wx/lib/gcc_x64_dll/mswu/wx/version.h"
+    found: "C:/dev/wx/include/wx/version.h"
+    search_context:
+      ENV{PATH}:
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:\\msys64\\usr\\bin"
+        - "C:/Windows/System32/HWAudioDriver"
+        - "C:\\WINDOWS\\system32"
+        - "C:/WINDOWS"
+        - "C:\\WINDOWS\\System32\\Wbem"
+        - "C:/WINDOWS/System32/WindowsPowerShell/v1.0/"
+        - "C:\\WINDOWS\\System32\\OpenSSH\\"
+        - "C:/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps"
+        - "C:\\Program Files\\dotnet\\"
+        - "C:/Program Files/CMake/bin"
+        - "C:\\ProgramData\\chocolatey\\bin"
+        - "C:/Program Files/Git/cmd"
+        - "C:\\dev\\wx\\lib\\gcc_x64_dll"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Python314/Scripts/"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Python\\Python314\\"
+        - "C:/Users/l.sakharnova/AppData/Local/Programs/Python/Launcher/"
+        - "C:\\msys64\\ucrt64\\bin"
+        - "C:/Users/l.sakharnova/.dotnet/tools"
+        - "C:\\Users\\l.sakharnova\\AppData\\Local\\Programs\\Microsoft VS Code\\bin"
+      CMAKE_INSTALL_PREFIX: "C:/Program Files (x86)/Start"
+      CMAKE_SYSTEM_PREFIX_PATH:
+        - "C:/msys64/ucrt64"
+        - "C:/Program Files"
+        - "C:/Program Files (x86)"
+        - "C:/Program Files/CMake"
+        - "C:/Program Files (x86)/Start"
+...

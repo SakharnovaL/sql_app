@@ -1,4 +1,6 @@
 #include <wx/wx.h>
+#include <sqlite3.h>
+#include <wx/listctrl.h>
 
 class MyApp : public wxApp{
 public:
@@ -62,4 +64,8 @@ public:
     void OnAddNewBD(wxCommandEvent& event);
     void OnEditBD(wxCommandEvent& event);
     void OnDelBd(wxCommandEvent& event);
+private:
+    sqlite3* m_bd;
+    wxListCtrl* m_list;
+    void LoadTableData(const wxString& table_name);
 };

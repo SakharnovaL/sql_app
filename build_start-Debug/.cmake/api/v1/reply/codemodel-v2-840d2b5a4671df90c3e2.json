@@ -6,6 +6,20 @@
 			[
 				{
 					"directoryIndex" : 0,
+					"id" : "SQLite3::SQLite3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SQLite3__SQLite3-Debug-a84990732b25ca5853d7.json",
+					"name" : "SQLite3::SQLite3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "SQLite::SQLite3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-SQLite__SQLite3-Debug-1dcacebdfd8d06385ed3.json",
+					"name" : "SQLite::SQLite3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
 					"id" : "wxWidgets::wxWidgets::@6890427a1f51a3e7e1df",
 					"jsonFile" : "target-wxWidgets__wxWidgets-Debug-1de6f1c4716982424abd.json",
 					"name" : "wxWidgets::wxWidgets",
@@ -17,7 +31,9 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"build" : ".",
 					"jsonFile" : "directory-.-Debug-f040eec181a89de70dbe.json",
@@ -39,7 +55,9 @@
 				{
 					"abstractTargetIndexes" : 
 					[
-						0
+						0,
+						1,
+						2
 					],
 					"directoryIndexes" : 
 					[
@@ -57,7 +75,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "Start::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-Start-Debug-5476a3a95d83cd9e2393.json",
+					"jsonFile" : "target-Start-Debug-ab192615b754f70cdc8b.json",
 					"name" : "Start",
 					"projectIndex" : 0
 				}

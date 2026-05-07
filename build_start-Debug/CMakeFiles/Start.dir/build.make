@@ -98,6 +98,7 @@ Start.exe: CMakeFiles/Start.dir/build.make
 Start.exe: C:/dev/wx/lib/gcc_x64_dll/libwxbase33ud_net.a
 Start.exe: C:/dev/wx/lib/gcc_x64_dll/libwxmsw33ud_core.a
 Start.exe: C:/dev/wx/lib/gcc_x64_dll/libwxbase33ud.a
+Start.exe: C:/msys64/ucrt64/lib/libsqlite3.dll.a
 Start.exe: CMakeFiles/Start.dir/linkLibs.rsp
 Start.exe: CMakeFiles/Start.dir/objects1.rsp
 Start.exe: CMakeFiles/Start.dir/link.txt

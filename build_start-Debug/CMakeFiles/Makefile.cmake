@@ -22,6 +22,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Compiler/GNU.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPackageHandleStandardArgs.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPackageMessage.cmake"
+  "C:/Program Files/CMake/share/cmake-4.3/Modules/FindPkgConfig.cmake"
+  "C:/Program Files/CMake/share/cmake-4.3/Modules/FindSQLite3.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/FindwxWidgets.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Internal/CMakeCLinkerInformation.cmake"
   "C:/Program Files/CMake/share/cmake-4.3/Modules/Internal/CMakeCXXLinkerInformation.cmake"

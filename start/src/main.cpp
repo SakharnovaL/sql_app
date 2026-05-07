@@ -474,6 +474,43 @@ bool MyApp::OnInit(){
     return true;
 }
 
+static int GetTablesCallback(void* data, int arg_c, char** arg_v, char** azColName){        //добавляет название таблицы в выпадающий список
+    wxChoice* choice = (wxChoice*)data;
+    if(arg_c > 0 && arg_v[0]){                                                  //проверяем не пустая ли бд 
+        choice->Append(wxString::FromUTF8(arg_v[0]));
+    }
+    return 0;
+}
+
+static int DisplayTableCallback(void* data, int arg_c, char** arg_v, char** azColName){
+    wxListCtrl* list = (wxListCtrl*)data;
+
+    static bool col_add = false;                                                 //на первом шаге создаем колонки, дальше скип
+    if(col_add == false){                                                        //создание колонок
+        for(int i = 0; i < arg_c; i++){
+            list->InsertColumn(i, wxString::FromUTF8(azColName[i]));
+            list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);
+        }
+        col_add = true;
+    }
+
+    long item_index = list->GetItemCount();                                     //номер новой строки
+    for(int i = 0; i < arg_c; i++){
+        wxString val = "";
+        if(arg_v[i] != nullptr){
+            wxString val = wxString::FromUTF8(arg_v[i]);
+        }
+
+        if(i == 0){
+            list->InsertItem(item_index, val);                                  //создаем глвую строчку
+        }
+        else{
+            list->SetItem(item_index, i, val);                                  //заполняем значением только что созданную строчку
+        }
+    }
+    return 0;
+}
+
 static int get_col_callback(void* data, int arg_c, char** arg_v, char** az_col_name){
     std::vector<wxString>* col = static_cast<std::vector<wxString>*>(data);      //принудительно приводим к типу данных, В круглых скобках — значение value, в угловых скобках — тип type.
     if(arg_c > 1 && arg_v[1]){
@@ -497,4 +534,23 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
         m_list->InsertColumn(i, col[i]);
         m_list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);                       //ширина всего столбца такая, чтоб полностью влезало название столбца
     }
+
+    wxString table = wxString::Format("SELECT * FROM %s", table_name);              //забираем все данные из таблицы, за исключением названия столбцов
+
+    struct callback_data{                                                           //нужна, чтоб было понятно куда отображать данные callback функции
+        wxListCtrl* list_ctrl;
+    };
+
+    callback_data data;
+    data.list_ctrl = m_list;
+
+    char* err_msg = nullptr;
+    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, &data, &err_msg);
+
+    SetStatusText(wxString::Format("записей: %s", m_list->GetItemCount()));         //добавляет строчку "было добавлено столько-то записей"
+}
+
+void Start_Frame::OnTableSelected(wxCommandEvent& event){                           //ничегоне возвращает, так как обработчик события выбора бд
+    wxString table_name = m_table_choice->GetString(event.GetSelection());          //возвращает строчку типа wxString с названием выбраной бд
+    LoadTableData(table_name);                                                      //вызываем функцию, которая рисует табличку
 }

@@ -39,10 +39,12 @@ public:
     Open_BD(wxWindow* parent);
     wxTextCtrl* m_chooseBD;
     wxStaticText* m_info;
+    wxString m_path;
 
     void OnOk(wxCommandEvent& event);
     //void OnBack(wxCommandEvent& event);
     void OnBrowse(wxCommandEvent& event);
+    wxString GetPath() const;
 };
 
 class Dialog_Create_BD : public wxDialog{
@@ -58,8 +60,9 @@ public:
 
 class Start_Frame : public wxFrame{
 public:
-    Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
     wxTextCtrl* m_findBD;
+
+    Start_Frame(wxWindow* parent, wxString title = wxT("Менеджер баз данных"));
     void OnNewBD(wxCommandEvent& event);
     void OnOpenBD(wxCommandEvent& event);
     void OnAddNewBD(wxCommandEvent& event);
@@ -69,7 +72,9 @@ private:
     sqlite3* m_bd;
     wxListCtrl* m_list;
     wxChoice* m_table_choice;
+
     void LoadTables();
     void LoadTableData(const wxString& table_name);
     void OnTableSelected(wxCommandEvent &event);
+    void OpenBD(const wxString& dbPath);
 };

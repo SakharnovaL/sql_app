@@ -326,8 +326,13 @@ void Open_BD::OnOk(wxCommandEvent& event){                                      
     
     wxMessageBox(wxString::Format("Открыта база данных создана из папки '%s'", dbPath), "Успех", wxOK);
     
+    m_path = dbPath;
     EndModal(wxID_OK);
 };
+
+wxString Open_BD::GetPath() const{
+    return m_path;
+}
 
 Dialog_Create_BD::Dialog_Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -437,6 +442,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     wxBoxSizer *HFrame_Control4 = new wxBoxSizer(wxHORIZONTAL);
 
     wxStaticText* cur_label = new wxStaticText(main_panel, wxID_ANY, wxT("текущая база данных"));
+    m_bd = nullptr;
     HFrame_Control1->Add(cur_label);
 
     wxStaticText* name_label = new wxStaticText(main_panel, wxID_ANY, wxT("поиск"));
@@ -467,38 +473,53 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     main_panel->Layout();
 };
 
+void Start_Frame::OpenBD(const wxString& dbPath){
+    if(m_bd){
+        sqlite3_close(m_bd);
+        m_bd = nullptr;
+    }
+
+    if(sqlite3_open(dbPath.ToUTF8(), &m_bd) != SQLITE_OK){
+        wxMessageBox("Не удалось открыть базу данных", "Ошибка", wxOK | wxICON_ERROR);
+        return;
+    }
+    
+    SetStatusText("Открыта БД: " + dbPath);
+    LoadTables();
+}
+
 void Start_Frame::OnNewBD(wxCommandEvent& event){
     Dialog_Create_BD dlg(this);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        SetStatusText("База данных создана");       // обновляем статус
+
     }
 }
 
 void Start_Frame::OnOpenBD(wxCommandEvent& event){
     Open_BD dlg(this);                              // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        SetStatusText("База данных создана");       // обновляем статус
+        wxString path = dlg.GetPath();
     }
 }
 
 void Start_Frame::OnAddNewBD(wxCommandEvent& event){
     Add_new_BD dlg(this);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        SetStatusText("База данных создана");       // обновляем статус
+        
     }
 }
 
 void Start_Frame::OnEditBD(wxCommandEvent& event){
     Edit_BD dlg(this);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        SetStatusText("База данных создана");       // обновляем статус
+        
     }
 }
 
 void Start_Frame::OnDelBd(wxCommandEvent& event){
     Del_BD dlg(this);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        SetStatusText("База данных создана");       // обновляем статус
+        
     }
 }
 

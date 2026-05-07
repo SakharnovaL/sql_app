@@ -69,6 +69,7 @@ private:
     sqlite3* m_bd;
     wxListCtrl* m_list;
     wxChoice* m_table_choice;
+    void LoadTables();
     void LoadTableData(const wxString& table_name);
     void OnTableSelected(wxCommandEvent &event);
 };

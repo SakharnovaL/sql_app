@@ -297,11 +297,11 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
             if(sqlite3_open(file.ToUTF8(), &bd) == SQLITE_OK){      //открываем бд
                 sqlite3_stmt* stmt;
                 int table_cnt = 0;
-                if(sqlite3_prepare_v2(bd, "SELECT COUNT(*) FROM sqlite_master WHERE type='table';", -1, &stmt, nullptr) == SQLITE_OK){
-                    if(sqlite3_step(stmt) == SQLITE_ROW){
-                        table_cnt = sqlite3_column_int(stmt, 0);
+                if(sqlite3_prepare_v2(bd, "SELECT COUNT(*) FROM sqlite_master WHERE type='table';", -1, &stmt, nullptr) == SQLITE_OK){      //подсчитывает кол-во таблиц в бд
+                    if(sqlite3_step(stmt) == SQLITE_ROW){           //выполняет запрос и если строка не пустая, то переходит к первой строке результата
+                        table_cnt = sqlite3_column_int(stmt, 0);    //берет значение из первого столбца
                     }
-                    sqlite3_finalize(stmt);
+                    sqlite3_finalize(stmt);                         //очищает подготовленный запрос, чтоб программа не умерла
                 }
                 sqlite3_close(bd);
                 info += "\nтаблиц: " + wxString::Format("%d", table_cnt);
@@ -538,6 +538,27 @@ static int DisplayTableCallback(void* data, int arg_c, char** arg_v, char** azCo
         }
     }
     return 0;
+}
+
+void Start_Frame::LoadTables(){
+    m_table_choice->Clear();
+
+    if(m_bd == nullptr){
+        return;
+    }
+
+    char* err_msg = nullptr;
+    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table';", GetTablesCallback, m_table_choice, &err_msg);
+
+    if(rc != SQLITE_OK){
+        wxMessageBox(wxString::FromUTF8(err_msg), wxT("ошибка"), wxOK | wxICON_ERROR);
+        sqlite3_free(err_msg);
+    }
+
+    if(m_table_choice->GetCount() > 0){
+        m_table_choice->SetSelection(0);
+        LoadTableData(m_table_choice->GetString(0));
+    }
 }
 
 static int get_col_callback(void* data, int arg_c, char** arg_v, char** az_col_name){

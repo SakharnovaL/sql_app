@@ -4,6 +4,7 @@
 #include <vector>
 #include "main.h"
 #include <wx/listctrl.h>
+#include <wx/filename.h>
 
 Del_BD::Del_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
@@ -260,7 +261,10 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
     choose_sizer->Add(choose_label);
     choose_sizer->Add(m_chooseBD);
     choose_sizer->Add(browse_btn);
-    //надо добавить прямоугольник с инфой о выбранной бд (имя, размер, создана, записей)
+    
+    m_info = new wxStaticText(panel, wxID_ANY, wxT("информация о бд"));
+    info_sizer->Add(m_info);
+
     wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("открыть"));
     wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
     btn_sizer->Add(ok_btn);
@@ -276,9 +280,34 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
 };
 
 void Open_BD::OnBrowse(wxCommandEvent& event){                                             //Открывает диалог выбора папки (wxDirDialog) Начальный путь — текущее значение из поля пути Если пользователь выбрал папку (нажал OK), обновляет поле пути
-    wxDirDialog dlg(this, "Выберите папку для сохранения базы данных", m_chooseBD->GetValue());
+    wxFileDialog dlg(this, "Выберите папку для сохранения базы данных", m_chooseBD->GetValue(), "", "SQLite DB files (*.db;*.sqlite;*.sqlite3)|*.db;*.sqlite;*.sqlite3|All files (*.*)|*.*", wxFD_OPEN | wxFD_FILE_MUST_EXIST);         //выбирает только файлы с расширенем бд
     if (dlg.ShowModal() == wxID_OK){
-        m_chooseBD->SetValue(dlg.GetPath());
+        wxString file = dlg.GetPath();          //записывает полный путь
+        m_chooseBD->SetValue(file);             //вставляем в текстовое поле путь
+
+        wxFileName fileInfo(file);
+        if(fileInfo.FileExists()){              //если не было инфы о бд, то заводим ее
+            wxString info;
+            info += wxT("имя: ") + fileInfo.GetFullName() + "\n";
+            info += wxT("путь: ") + fileInfo.GetFullPath() + "\n";
+            info += wxT("размер: ") + wxString::Format("%.2f KB", fileInfo.GetSize().GetValue() / 1024.0) + "\n";
+            info += wxT("создана: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S");
+
+            sqlite3* bd = nullptr;
+            if(sqlite3_open(file.ToUTF8(), &bd) == SQLITE_OK){      //открываем бд
+                sqlite3_stmt* stmt;
+                int table_cnt = 0;
+                if(sqlite3_prepare_v2(bd, "SELECT COUNT(*) FROM sqlite_master WHERE type='table';", -1, &stmt, nullptr) == SQLITE_OK){
+                    if(sqlite3_step(stmt) == SQLITE_ROW){
+                        table_cnt = sqlite3_column_int(stmt, 0);
+                    }
+                    sqlite3_finalize(stmt);
+                }
+                sqlite3_close(bd);
+                info += "\nтаблиц: " + wxString::Format("%d", table_cnt);
+            }
+            m_info->SetLabel(info);
+        }
     }
 };
 

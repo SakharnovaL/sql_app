@@ -38,6 +38,7 @@ class Open_BD : public wxDialog{
 public:
     Open_BD(wxWindow* parent);
     wxTextCtrl* m_chooseBD;
+    wxStaticText* m_info;
 
     void OnOk(wxCommandEvent& event);
     //void OnBack(wxCommandEvent& event);

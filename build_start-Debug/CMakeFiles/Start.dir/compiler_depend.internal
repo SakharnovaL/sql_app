@@ -37,6 +37,7 @@ CMakeFiles/Start.dir/src/main.cpp.obj
  C:/dev/wx/include/wx/compositewin.h
  C:/dev/wx/include/wx/containr.h
  C:/dev/wx/include/wx/control.h
+ C:/dev/wx/include/wx/convauto.h
  C:/dev/wx/include/wx/cpp.h
  C:/dev/wx/include/wx/ctrlsub.h
  C:/dev/wx/include/wx/cursor.h
@@ -56,8 +57,10 @@ CMakeFiles/Start.dir/src/main.cpp.obj
  C:/dev/wx/include/wx/event.h
  C:/dev/wx/include/wx/eventfilter.h
  C:/dev/wx/include/wx/features.h
+ C:/dev/wx/include/wx/file.h
  C:/dev/wx/include/wx/filedlg.h
  C:/dev/wx/include/wx/filefn.h
+ C:/dev/wx/include/wx/filename.h
  C:/dev/wx/include/wx/flags.h
  C:/dev/wx/include/wx/font.h
  C:/dev/wx/include/wx/fontenc.h

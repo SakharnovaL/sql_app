@@ -37,14 +37,13 @@ public:
 class Open_BD : public wxDialog{
 public:
     Open_BD(wxWindow* parent);
-    wxTextCtrl* m_chooseBD;
-    wxStaticText* m_info;
-    wxString m_path;
-
+    wxString GetSelPath() const;
     void OnOk(wxCommandEvent& event);
-    //void OnBack(wxCommandEvent& event);
     void OnBrowse(wxCommandEvent& event);
-    wxString GetPath() const;
+private:
+    wxTextCtrl* m_chooseBD;                     //строчка с выбранным бд
+    wxStaticText* m_info;                       //табличка с инфой о файле
+    wxString m_path;                            //путь к бд
 };
 
 class Dialog_Create_BD : public wxDialog{

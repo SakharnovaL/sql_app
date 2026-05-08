@@ -276,6 +276,9 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
     wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("открыть"));
     wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
+
+    ok_btn->Bind(wxEVT_BUTTON, &Open_BD::OnOk, this);
+
     btn_sizer->AddStretchSpacer();
     btn_sizer->Add(ok_btn, 0, wxRight, 5);
     btn_sizer->Add(cancel_btn, 0);
@@ -285,7 +288,7 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
 };
 
 void Open_BD::OnBrowse(wxCommandEvent& event){                                             //Открывает диалог выбора папки (wxDirDialog) Начальный путь — текущее значение из поля пути Если пользователь выбрал папку (нажал OK), обновляет поле пути
-    wxFileDialog dlg(this, "Выберите папку для сохранения базы данных", m_chooseBD->GetValue(), "", "SQLite DB files (*.db;*.sqlite;*.sqlite3)|*.db;*.sqlite;*.sqlite3|All files (*.*)|*.*", wxFD_OPEN | wxFD_FILE_MUST_EXIST);         //выбирает только файлы с расширенем бд
+    wxFileDialog dlg(this, wxT("Выберите папку для сохранения базы данных"), m_chooseBD->GetValue(), "", "SQLite DB files (*.db;*.sqlite;*.sqlite3)|*.db;*.sqlite;*.sqlite3|All files (*.*)|*.*", wxFD_OPEN | wxFD_FILE_MUST_EXIST);         //выбирает только файлы с расширенем бд
     if (dlg.ShowModal() == wxID_OK){
         wxString file = dlg.GetPath();          //записывает полный путь
         m_chooseBD->SetValue(file);             //вставляем в текстовое поле путь
@@ -317,20 +320,25 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
 };
 
 void Open_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
+    if(m_chooseBD == nullptr){
+        wxMessageBox(wxT("m_chooseBD is NULL!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        event.Skip(false);
+        return;
+    }
     wxString dbPath = m_chooseBD->GetValue();   // читаем путь
     
     if(dbPath.IsEmpty()){
-        wxMessageBox("Введите путь базы данных!", "Ошибка", wxOK | wxICON_ERROR);
+        wxMessageBox(wxT("Введите путь базы данных!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        event.Skip(false);
         return;
     }
     
-    wxMessageBox(wxString::Format("Открыта база данных создана из папки '%s'", dbPath), "Успех", wxOK);
-    
     m_path = dbPath;
-    EndModal(wxID_OK);
+    
+    event.Skip(true);
 };
 
-wxString Open_BD::GetPath() const{
+wxString Open_BD::GetSelPath() const{
     return m_path;
 }
 
@@ -441,8 +449,10 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     wxBoxSizer *HFrame_Control3 = new wxBoxSizer(wxHORIZONTAL);
     wxBoxSizer *HFrame_Control4 = new wxBoxSizer(wxHORIZONTAL);
 
-    wxStaticText* cur_label = new wxStaticText(main_panel, wxID_ANY, wxT("текущая база данных"));
     m_bd = nullptr;
+    m_list = new wxListCtrl(main_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
+
+    wxStaticText* cur_label = new wxStaticText(main_panel, wxID_ANY, wxT("текущая база данных"));
     HFrame_Control1->Add(cur_label);
 
     wxStaticText* name_label = new wxStaticText(main_panel, wxID_ANY, wxT("поиск"));
@@ -453,6 +463,9 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     HFrame_Control2->Add(m_findBD);
     HFrame_Control2->Add(btn_find);
     HFrame_Control2->Add(btn_clear);
+
+    m_table_choice = new wxChoice(main_panel, wxID_ANY);
+    HFrame_Control3->Add(m_table_choice);
 
     wxButton* btn_plus = new wxButton(main_panel, wxID_ANY, wxT("добавить"));
     wxButton* btn_edit = new wxButton(main_panel, wxID_ANY, wxT("редактировать"));
@@ -467,6 +480,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     VStart_Frame->Add(HFrame_Control1);
     VStart_Frame->Add(HFrame_Control2);
     VStart_Frame->Add(HFrame_Control3);
+    VStart_Frame->Add(m_list);
     VStart_Frame->Add(HFrame_Control4);
 
     main_panel->SetSizer(VStart_Frame);
@@ -474,17 +488,30 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 };
 
 void Start_Frame::OpenBD(const wxString& dbPath){
+    if(dbPath.IsEmpty()){
+        wxMessageBox(wxT("путь к бд пуст"), wxT("ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
+    if(wxFileName::FileExists(dbPath) == false){
+        wxMessageBox(wxT("бд не существует"), wxT("ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
     if(m_bd){
         sqlite3_close(m_bd);
         m_bd = nullptr;
     }
+    
+    int result = sqlite3_open(dbPath.ToUTF8(), &m_bd);
 
     if(sqlite3_open(dbPath.ToUTF8(), &m_bd) != SQLITE_OK){
-        wxMessageBox("Не удалось открыть базу данных", "Ошибка", wxOK | wxICON_ERROR);
+        wxMessageBox(wxT("Не удалось открыть базу данных"), wxT("ошибка"), wxOK | wxICON_ERROR);
+        m_bd = nullptr;
         return;
     }
     
-    SetStatusText("Открыта БД: " + dbPath);
+    //SetStatusText("Открыта БД: " + dbPath);
     LoadTables();
 }
 
@@ -498,7 +525,11 @@ void Start_Frame::OnNewBD(wxCommandEvent& event){
 void Start_Frame::OnOpenBD(wxCommandEvent& event){
     Open_BD dlg(this);                              // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        wxString path = dlg.GetPath();
+        wxString path = dlg.GetSelPath();
+        OpenBD(path);
+        /*if(path.IsEmpty() == false){
+            OpenBD(path);
+        }*/
     }
 }
 
@@ -570,7 +601,12 @@ void Start_Frame::LoadTables(){
     m_table_choice->Clear();
 
     if(m_bd == nullptr){
+        wxMessageBox(wxT("LoadTables: m_bd == nullptr"), wxT("Ошибка"), wxOK);
         return;
+    }
+
+    if(m_list){
+        m_list->ClearAll();
     }
 
     char* err_msg = nullptr;
@@ -623,7 +659,7 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
     char* err_msg = nullptr;
     sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, &data, &err_msg);
 
-    SetStatusText(wxString::Format("записей: %s", m_list->GetItemCount()));         //добавляет строчку "было добавлено столько-то записей"
+    //SetStatusText(wxString::Format("записей: %s", m_list->GetItemCount()));         //добавляет строчку "было добавлено столько-то записей"
 }
 
 void Start_Frame::OnTableSelected(wxCommandEvent& event){                           //ничегоне возвращает, так как обработчик события выбора бд

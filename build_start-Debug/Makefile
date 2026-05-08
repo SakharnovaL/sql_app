@@ -152,6 +152,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+src/open_bd.obj: src/open_bd.cpp.obj
+.PHONY : src/open_bd.obj
+
+# target to build an object file
+src/open_bd.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/open_bd.cpp.obj
+.PHONY : src/open_bd.cpp.obj
+
+src/open_bd.i: src/open_bd.cpp.i
+.PHONY : src/open_bd.i
+
+# target to preprocess a source file
+src/open_bd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/open_bd.cpp.i
+.PHONY : src/open_bd.cpp.i
+
+src/open_bd.s: src/open_bd.cpp.s
+.PHONY : src/open_bd.s
+
+# target to generate assembly for a file
+src/open_bd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/open_bd.cpp.s
+.PHONY : src/open_bd.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -164,6 +188,9 @@ help:
 	@echo ... src/main.obj
 	@echo ... src/main.i
 	@echo ... src/main.s
+	@echo ... src/open_bd.obj
+	@echo ... src/open_bd.i
+	@echo ... src/open_bd.s
 .PHONY : help
 
 

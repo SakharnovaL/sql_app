@@ -11,6 +11,8 @@ file(GLOB project
 )
 
 add_executable(Start ${project}
+     src/main.cpp
+     src/open_bd.cpp
      src/main.h)
 
 target_link_libraries(Start ${wxWidgets_LIBRARIES})

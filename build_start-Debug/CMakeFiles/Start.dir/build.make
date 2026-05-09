@@ -71,11 +71,26 @@ include CMakeFiles/Start.dir/flags.make
 CMakeFiles/Start.dir/codegen:
 .PHONY : CMakeFiles/Start.dir/codegen
 
+CMakeFiles/Start.dir/src/add_bd.cpp.obj: CMakeFiles/Start.dir/flags.make
+CMakeFiles/Start.dir/src/add_bd.cpp.obj: CMakeFiles/Start.dir/includes_CXX.rsp
+CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:/devel/start/src/add_bd.cpp
+CMakeFiles/Start.dir/src/add_bd.cpp.obj: CMakeFiles/Start.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Start.dir/src/add_bd.cpp.obj"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Start.dir/src/add_bd.cpp.obj -MF CMakeFiles\Start.dir\src\add_bd.cpp.obj.d -o CMakeFiles\Start.dir\src\add_bd.cpp.obj -c C:\devel\start\src\add_bd.cpp
+
+CMakeFiles/Start.dir/src/add_bd.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/Start.dir/src/add_bd.cpp.i"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\devel\start\src\add_bd.cpp > CMakeFiles\Start.dir\src\add_bd.cpp.i
+
+CMakeFiles/Start.dir/src/add_bd.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/Start.dir/src/add_bd.cpp.s"
+	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\devel\start\src\add_bd.cpp -o CMakeFiles\Start.dir\src\add_bd.cpp.s
+
 CMakeFiles/Start.dir/src/del_bd.cpp.obj: CMakeFiles/Start.dir/flags.make
 CMakeFiles/Start.dir/src/del_bd.cpp.obj: CMakeFiles/Start.dir/includes_CXX.rsp
 CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp
 CMakeFiles/Start.dir/src/del_bd.cpp.obj: CMakeFiles/Start.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Start.dir/src/del_bd.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Start.dir/src/del_bd.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Start.dir/src/del_bd.cpp.obj -MF CMakeFiles\Start.dir\src\del_bd.cpp.obj.d -o CMakeFiles\Start.dir\src\del_bd.cpp.obj -c C:\devel\start\src\del_bd.cpp
 
 CMakeFiles/Start.dir/src/del_bd.cpp.i: cmake_force
@@ -90,7 +105,7 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: CMakeFiles/Start.dir/flags.make
 CMakeFiles/Start.dir/src/edit_bd.cpp.obj: CMakeFiles/Start.dir/includes_CXX.rsp
 CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp
 CMakeFiles/Start.dir/src/edit_bd.cpp.obj: CMakeFiles/Start.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Start.dir/src/edit_bd.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Start.dir/src/edit_bd.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Start.dir/src/edit_bd.cpp.obj -MF CMakeFiles\Start.dir\src\edit_bd.cpp.obj.d -o CMakeFiles\Start.dir\src\edit_bd.cpp.obj -c C:\devel\start\src\edit_bd.cpp
 
 CMakeFiles/Start.dir/src/edit_bd.cpp.i: cmake_force
@@ -105,7 +120,7 @@ CMakeFiles/Start.dir/src/main.cpp.obj: CMakeFiles/Start.dir/flags.make
 CMakeFiles/Start.dir/src/main.cpp.obj: CMakeFiles/Start.dir/includes_CXX.rsp
 CMakeFiles/Start.dir/src/main.cpp.obj: C:/devel/start/src/main.cpp
 CMakeFiles/Start.dir/src/main.cpp.obj: CMakeFiles/Start.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/Start.dir/src/main.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Start.dir/src/main.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Start.dir/src/main.cpp.obj -MF CMakeFiles\Start.dir\src\main.cpp.obj.d -o CMakeFiles\Start.dir\src\main.cpp.obj -c C:\devel\start\src\main.cpp
 
 CMakeFiles/Start.dir/src/main.cpp.i: cmake_force
@@ -120,7 +135,7 @@ CMakeFiles/Start.dir/src/open_bd.cpp.obj: CMakeFiles/Start.dir/flags.make
 CMakeFiles/Start.dir/src/open_bd.cpp.obj: CMakeFiles/Start.dir/includes_CXX.rsp
 CMakeFiles/Start.dir/src/open_bd.cpp.obj: C:/devel/start/src/open_bd.cpp
 CMakeFiles/Start.dir/src/open_bd.cpp.obj: CMakeFiles/Start.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/Start.dir/src/open_bd.cpp.obj"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/Start.dir/src/open_bd.cpp.obj"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/Start.dir/src/open_bd.cpp.obj -MF CMakeFiles\Start.dir\src\open_bd.cpp.obj.d -o CMakeFiles\Start.dir\src\open_bd.cpp.obj -c C:\devel\start\src\open_bd.cpp
 
 CMakeFiles/Start.dir/src/open_bd.cpp.i: cmake_force
@@ -133,6 +148,7 @@ CMakeFiles/Start.dir/src/open_bd.cpp.s: cmake_force
 
 # Object files for target Start
 Start_OBJECTS = \
+"CMakeFiles/Start.dir/src/add_bd.cpp.obj" \
 "CMakeFiles/Start.dir/src/del_bd.cpp.obj" \
 "CMakeFiles/Start.dir/src/edit_bd.cpp.obj" \
 "CMakeFiles/Start.dir/src/main.cpp.obj" \
@@ -141,6 +157,7 @@ Start_OBJECTS = \
 # External object files for target Start
 Start_EXTERNAL_OBJECTS =
 
+Start.exe: CMakeFiles/Start.dir/src/add_bd.cpp.obj
 Start.exe: CMakeFiles/Start.dir/src/del_bd.cpp.obj
 Start.exe: CMakeFiles/Start.dir/src/edit_bd.cpp.obj
 Start.exe: CMakeFiles/Start.dir/src/main.cpp.obj
@@ -153,7 +170,7 @@ Start.exe: C:/msys64/ucrt64/lib/libsqlite3.dll.a
 Start.exe: CMakeFiles/Start.dir/linkLibs.rsp
 Start.exe: CMakeFiles/Start.dir/objects1.rsp
 Start.exe: CMakeFiles/Start.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking CXX executable Start.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable Start.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\Start.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

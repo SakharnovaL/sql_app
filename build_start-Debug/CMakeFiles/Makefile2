@@ -84,12 +84,12 @@ clean: CMakeFiles/Start.dir/clean
 CMakeFiles/Start.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=1,2,3 "Built target Start"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=1,2,3,4 "Built target Start"
 .PHONY : CMakeFiles/Start.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Start.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\devel\build_start-Debug\CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start C:\devel\build_start-Debug\CMakeFiles 4
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Makefile2 CMakeFiles/Start.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start C:\devel\build_start-Debug\CMakeFiles 0
 .PHONY : CMakeFiles/Start.dir/rule
@@ -101,7 +101,7 @@ Start: CMakeFiles/Start.dir/rule
 # codegen rule for target.
 CMakeFiles/Start.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=1,2,3 "Finished codegen for target Start"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=C:\devel\build_start-Debug\CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target Start"
 .PHONY : CMakeFiles/Start.dir/codegen
 
 # clean rule for target.

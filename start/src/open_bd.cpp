@@ -106,4 +106,3 @@ void Open_BD::OnOk(wxCommandEvent& event){                                      
 wxString Open_BD::GetSelPath() const{
     return m_path;
 }
-

@@ -1,6 +1,12 @@
 [
 {
   "directory": "C:/devel/build_start-Debug",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DUNICODE -DWXUSINGDLL -D_UNICODE @CMakeFiles/Start.dir/includes_CXX.rsp -g -o CMakeFiles\\Start.dir\\src\\edit_bd.cpp.obj -c C:\\devel\\start\\src\\edit_bd.cpp",
+  "file": "C:/devel/start/src/edit_bd.cpp",
+  "output": "CMakeFiles/Start.dir/src/edit_bd.cpp.obj"
+},
+{
+  "directory": "C:/devel/build_start-Debug",
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DUNICODE -DWXUSINGDLL -D_UNICODE @CMakeFiles/Start.dir/includes_CXX.rsp -g -o CMakeFiles\\Start.dir\\src\\main.cpp.obj -c C:\\devel\\start\\src\\main.cpp",
   "file": "C:/devel/start/src/main.cpp",
   "output": "CMakeFiles/Start.dir/src/main.cpp.obj"

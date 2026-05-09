@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "C:/devel/start/src/edit_bd.cpp" "CMakeFiles/Start.dir/src/edit_bd.cpp.obj" "gcc" "CMakeFiles/Start.dir/src/edit_bd.cpp.obj.d"
   "C:/devel/start/src/main.cpp" "CMakeFiles/Start.dir/src/main.cpp.obj" "gcc" "CMakeFiles/Start.dir/src/main.cpp.obj.d"
   "C:/devel/start/src/open_bd.cpp" "CMakeFiles/Start.dir/src/open_bd.cpp.obj" "gcc" "CMakeFiles/Start.dir/src/open_bd.cpp.obj.d"
   )

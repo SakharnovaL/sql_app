@@ -14,16 +14,6 @@ public:
     Del_BD(wxWindow* parent);
 };
 
-class Edit_BD : public wxDialog{
-public:
-    Edit_BD(wxWindow* parent);
-    wxTextCtrl* m_name;
-    wxTextCtrl* m_meaning;
-    wxTextCtrl* m_discribe;
-
-    void OnOk(wxCommandEvent& event);
-};
-
 class Add_new_BD : public wxDialog{
 public:
     Add_new_BD(wxWindow* parent);

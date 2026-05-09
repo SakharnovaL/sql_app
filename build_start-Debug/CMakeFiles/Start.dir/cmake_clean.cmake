@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Start.dir/src/edit_bd.cpp.obj"
+  "CMakeFiles/Start.dir/src/edit_bd.cpp.obj.d"
   "CMakeFiles/Start.dir/src/main.cpp.obj"
   "CMakeFiles/Start.dir/src/main.cpp.obj.d"
   "CMakeFiles/Start.dir/src/open_bd.cpp.obj"

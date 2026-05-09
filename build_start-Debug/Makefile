@@ -128,6 +128,30 @@ Start/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/build
 .PHONY : Start/fast
 
+src/del_bd.obj: src/del_bd.cpp.obj
+.PHONY : src/del_bd.obj
+
+# target to build an object file
+src/del_bd.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/del_bd.cpp.obj
+.PHONY : src/del_bd.cpp.obj
+
+src/del_bd.i: src/del_bd.cpp.i
+.PHONY : src/del_bd.i
+
+# target to preprocess a source file
+src/del_bd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/del_bd.cpp.i
+.PHONY : src/del_bd.cpp.i
+
+src/del_bd.s: src/del_bd.cpp.s
+.PHONY : src/del_bd.s
+
+# target to generate assembly for a file
+src/del_bd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/del_bd.cpp.s
+.PHONY : src/del_bd.cpp.s
+
 src/edit_bd.obj: src/edit_bd.cpp.obj
 .PHONY : src/edit_bd.obj
 
@@ -209,6 +233,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... Start
+	@echo ... src/del_bd.obj
+	@echo ... src/del_bd.i
+	@echo ... src/del_bd.s
 	@echo ... src/edit_bd.obj
 	@echo ... src/edit_bd.i
 	@echo ... src/edit_bd.s

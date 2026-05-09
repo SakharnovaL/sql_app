@@ -9,11 +9,6 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
-class Del_BD : public wxDialog{
-public:
-    Del_BD(wxWindow* parent);
-};
-
 class Add_new_BD : public wxDialog{
 public:
     Add_new_BD(wxWindow* parent);

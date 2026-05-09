@@ -460,6 +460,11 @@ bool MyApp::OnInit(){
     return true;
 }
 
+struct DisplayCallbackData{
+    wxListCtrl* list_ctrl;
+    bool col_add;
+};
+
 static int GetTablesCallback(void* data, int arg_c, char** arg_v, char** azColName){        //добавляет название таблицы в выпадающий список
     wxChoice* choice = (wxChoice*)data;
     if(arg_c > 0 && arg_v[0]){                                                  //проверяем не пустая ли бд 
@@ -469,22 +474,36 @@ static int GetTablesCallback(void* data, int arg_c, char** arg_v, char** azColNa
 }
 
 static int DisplayTableCallback(void* data, int arg_c, char** arg_v, char** azColName){
-    wxListCtrl* list = (wxListCtrl*)data;
+    if(data == nullptr){
+        wxMessageBox(wxT("DisplayTableCallback: data == nullptr"), wxT("Ошибка"), wxOK);
+        return 1;
+    }
 
-    static bool col_add = false;                                                 //на первом шаге создаем колонки, дальше скип
-    if(col_add == false){                                                        //создание колонок
+    DisplayCallbackData* cd_data = static_cast<DisplayCallbackData*>(data);
+
+    if(cd_data == nullptr){
+        wxMessageBox(wxT("DisplayTableCallback: list == nullptr"), wxT("Ошибка"), wxOK);
+        return 1;
+    }
+
+    wxListCtrl* list = cd_data->list_ctrl;
+                                                    //на первом шаге создаем колонки, дальше скип
+    if(cd_data->col_add == false){                                                        //создание колонок
         for(int i = 0; i < arg_c; i++){
             list->InsertColumn(i, wxString::FromUTF8(azColName[i]));
             list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);
         }
-        col_add = true;
+        cd_data->col_add = true;
     }
 
     long item_index = list->GetItemCount();                                     //номер новой строки
     for(int i = 0; i < arg_c; i++){
-        wxString val = "";
+        wxString val;
         if(arg_v[i] != nullptr){
-            wxString val = wxString::FromUTF8(arg_v[i]);
+            val = wxString::FromUTF8(arg_v[i]);
+        }
+        else{
+            val = "";
         }
 
         if(i == 0){
@@ -549,15 +568,10 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
 
     wxString table = wxString::Format("SELECT * FROM %s", table_name);              //забираем все данные из таблицы, за исключением названия столбцов
 
-    struct callback_data{                                                           //нужна, чтоб было понятно куда отображать данные callback функции
-        wxListCtrl* list_ctrl;
-    };
-
-    callback_data data;
-    data.list_ctrl = m_list;
+    wxListCtrl* list_ctrl = m_list;
 
     char* err_msg = nullptr;
-    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, &data, &err_msg);
+    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, &list_ctrl, &err_msg);
 
     //SetStatusText(wxString::Format("записей: %s", m_list->GetItemCount()));         //добавляет строчку "было добавлено столько-то записей"
 }

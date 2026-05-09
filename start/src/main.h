@@ -34,8 +34,6 @@ public:
     void OnOk(wxCommandEvent& event);
 };
 
-
-
 class Dialog_Create_BD : public wxDialog{
 public:
     Dialog_Create_BD(wxWindow* parent);         //создание самого диалогового окна

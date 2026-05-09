@@ -716,7 +716,8 @@ CMakeFiles/Start.dir/src/main.cpp.obj: C:/devel/start/src/main.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
-  C:/devel/start/src/main.h
+  C:/devel/start/src/main.h \
+  C:/devel/start/src/open_bd.h
 
 CMakeFiles/Start.dir/src/open_bd.cpp.obj: C:/devel/start/src/open_bd.cpp \
   C:/dev/wx/include/wx/accel.h \

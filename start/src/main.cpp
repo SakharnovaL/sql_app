@@ -460,11 +460,6 @@ bool MyApp::OnInit(){
     return true;
 }
 
-struct DisplayCallbackData{
-    wxListCtrl* list_ctrl;
-    bool col_add;
-};
-
 static int GetTablesCallback(void* data, int arg_c, char** arg_v, char** azColName){        //добавляет название таблицы в выпадающий список
     wxChoice* choice = (wxChoice*)data;
     if(arg_c > 0 && arg_v[0]){                                                  //проверяем не пустая ли бд 
@@ -479,22 +474,12 @@ static int DisplayTableCallback(void* data, int arg_c, char** arg_v, char** azCo
         return 1;
     }
 
-    DisplayCallbackData* cd_data = static_cast<DisplayCallbackData*>(data);
+    wxListCtrl* list = (wxListCtrl*)data;
 
-    if(cd_data == nullptr){
+    if(list == nullptr){
         wxMessageBox(wxT("DisplayTableCallback: list == nullptr"), wxT("Ошибка"), wxOK);
         return 1;
-    }
-
-    wxListCtrl* list = cd_data->list_ctrl;
-                                                    //на первом шаге создаем колонки, дальше скип
-    if(cd_data->col_add == false){                                                        //создание колонок
-        for(int i = 0; i < arg_c; i++){
-            list->InsertColumn(i, wxString::FromUTF8(azColName[i]));
-            list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);
-        }
-        cd_data->col_add = true;
-    }
+    }                                                                           
 
     long item_index = list->GetItemCount();                                     //номер новой строки
     for(int i = 0; i < arg_c; i++){
@@ -529,7 +514,7 @@ void Start_Frame::LoadTables(){
     }
 
     char* err_msg = nullptr;
-    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table';", GetTablesCallback, m_table_choice, &err_msg);         //вызывает GetTablesCallback для каждой найденной таблицы
+    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';", GetTablesCallback, m_table_choice, &err_msg);         //вызывает GetTablesCallback для каждой найденной таблицы
 
     if(rc != SQLITE_OK){
         wxMessageBox(wxString::FromUTF8(err_msg), wxT("ошибка"), wxOK | wxICON_ERROR);
@@ -552,26 +537,37 @@ static int get_col_callback(void* data, int arg_c, char** arg_v, char** az_col_n
 
 void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то принимать с клавы*/){
     if(m_bd == nullptr){
+        wxMessageBox("m_bd == nullptr", wxT("Ошибка"), wxOK);
+        return;
+    }
+
+    if(m_list == nullptr){
+        wxMessageBox("m_list == nullptr", wxT("Ошибка"), wxOK);
         return;
     }
 
     m_list->ClearAll();
+    while(m_list->GetColumnCount() > 0){
+        m_list->DeleteColumn(0);
+    }
     //char* escaped = sqlite3_mprintf("%w", tableName.ToUTF8());        для ввода пользователем, надо кудато присобачить
     wxString col_tab = wxString::Format("PRAGMA table_info(%s);", table_name);      //sql запрос, format - принимает строку как printf в с, PRAGMA table_info передает название колонки и какой тип данных в нем хранится и еще какую-то парашу, которая мне не особо нужна
     std::vector<wxString> col;
-    sqlite3_exec(m_bd, col_tab.ToUTF8(), get_col_callback, &col, nullptr);          //заполняется вектор col названиями столбцов бд
-    
+    int rc = sqlite3_exec(m_bd, col_tab.ToUTF8(), get_col_callback, &col, nullptr);          //заполняется вектор col названиями столбцов бд
+    if(rc != SQLITE_OK){
+        wxMessageBox(wxT("Не удалось получить структуру таблицы"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
     for(size_t i = 0; i < col.size(); i++){                                         //size_t нужен для правильного сравнения размеров
         m_list->InsertColumn(i, col[i]);
         m_list->SetColumnWidth(i, wxLIST_AUTOSIZE_USEHEADER);                       //ширина всего столбца такая, чтоб полностью влезало название столбца
     }
 
     wxString table = wxString::Format("SELECT * FROM %s", table_name);              //забираем все данные из таблицы, за исключением названия столбцов
-
-    wxListCtrl* list_ctrl = m_list;
-
+    
     char* err_msg = nullptr;
-    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, &list_ctrl, &err_msg);
+    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, m_list, &err_msg);
 
     //SetStatusText(wxString::Format("записей: %s", m_list->GetItemCount()));         //добавляет строчку "было добавлено столько-то записей"
 }

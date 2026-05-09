@@ -220,7 +220,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     wxBoxSizer *HFrame_Control4 = new wxBoxSizer(wxHORIZONTAL);
 
     m_bd = nullptr;
-    m_list = new wxListCtrl(main_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES);
+    m_list = new wxListCtrl(main_panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES | wxLC_SINGLE_SEL);
 
     wxStaticText* cur_label = new wxStaticText(main_panel, wxID_ANY, wxT("текущая база данных"));
     HFrame_Control1->Add(cur_label);
@@ -323,9 +323,33 @@ void Start_Frame::OnEditBD(wxCommandEvent& event){
 }
 
 void Start_Frame::OnDelBd(wxCommandEvent& event){
-    Del_BD dlg(this);                     // создаём диалог
+    if(m_bd == nullptr){
+        wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
+    if(m_table_choice->GetCount() == 0){
+        wxMessageBox(wxT("Нет таблиц для удаления записей!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
+    long sel_row = m_list->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    if(sel_row == -1){
+        wxMessageBox(wxT("Выберите запись для удаления!"), wxT("Информация"), wxOK | wxICON_INFORMATION);
+        return;
+    }
+
+    wxString id = m_list->GetItemText(sel_row, 0);
+    long rec_id;                                    //нужен чтоб преобразовать из строчки число, в wxListCtrl хранятся только строчки
+    if(id.ToLong(&rec_id) == false){
+        wxMessageBox(wxT("Не удалось определить ID записи!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+
+    wxString table_name = m_table_choice->GetString(event.GetSelection());
+    Del_BD dlg(this, m_bd, table_name, rec_id);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        
+        LoadTableData(table_name);
     }
 }
 

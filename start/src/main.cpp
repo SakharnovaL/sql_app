@@ -202,9 +202,14 @@ void Start_Frame::OnOpenBD(wxCommandEvent& event){
 }
 
 void Start_Frame::OnAddNewBD(wxCommandEvent& event){
-    Add_new_BD dlg(this);                     // создаём диалог
+    if(m_bd == nullptr){
+        wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+    wxString table_name = m_table_choice->GetString(event.GetSelection());
+    Add_New_BD dlg(this, m_bd, table_name);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        
+        LoadTableData(table_name);
     }
 }
 

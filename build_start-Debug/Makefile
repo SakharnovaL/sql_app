@@ -272,6 +272,14 @@ src/open_bd.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/open_bd.cpp.s
 .PHONY : src/open_bd.cpp.s
 
+src/recource.obj: src/recource.rc.obj
+.PHONY : src/recource.obj
+
+# target to build an object file
+src/recource.rc.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/recource.rc.obj
+.PHONY : src/recource.rc.obj
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
@@ -299,6 +307,7 @@ help:
 	@echo ... src/open_bd.obj
 	@echo ... src/open_bd.i
 	@echo ... src/open_bd.s
+	@echo ... src/recource.obj
 .PHONY : help
 
 

@@ -17,7 +17,8 @@ add_executable(Start ${project}
      src/del_bd.cpp
      src/add_bd.cpp
      src/create_bd.cpp
-     src/main.h)
+     src/main.h
+     src/recource.rc)
 
 target_link_libraries(Start ${wxWidgets_LIBRARIES})
 target_link_libraries(Start SQLite3::SQLite3)

@@ -16,6 +16,7 @@ add_executable(Start ${project}
      src/edit_bd.cpp
      src/del_bd.cpp
      src/add_bd.cpp
+     src/create_bd.cpp
      src/main.h)
 
 target_link_libraries(Start ${wxWidgets_LIBRARIES})

@@ -9,17 +9,6 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
-class Dialog_Create_BD : public wxDialog{
-public:
-    Dialog_Create_BD(wxWindow* parent);         //создание самого диалогового окна
-    wxTextCtrl* m_nameBD;                       //поле для ввода названия
-    wxTextCtrl* m_pathBD;                       //поле для ввода пути к бд
-
-    void OnOk(wxCommandEvent& event);           //отработка кнопки создать
-    //void OnBack(wxCommandEvent& event);         //отработка кнопки отмена
-    void OnBrowse(wxCommandEvent& evenr);       //отработка кнопки обзор для выбора пути 
-};
-
 class Start_Frame : public wxFrame{
 public:
     wxTextCtrl* m_findBD;

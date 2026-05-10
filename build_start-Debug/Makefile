@@ -152,6 +152,30 @@ src/add_bd.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/add_bd.cpp.s
 .PHONY : src/add_bd.cpp.s
 
+src/create_bd.obj: src/create_bd.cpp.obj
+.PHONY : src/create_bd.obj
+
+# target to build an object file
+src/create_bd.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/create_bd.cpp.obj
+.PHONY : src/create_bd.cpp.obj
+
+src/create_bd.i: src/create_bd.cpp.i
+.PHONY : src/create_bd.i
+
+# target to preprocess a source file
+src/create_bd.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/create_bd.cpp.i
+.PHONY : src/create_bd.cpp.i
+
+src/create_bd.s: src/create_bd.cpp.s
+.PHONY : src/create_bd.s
+
+# target to generate assembly for a file
+src/create_bd.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\Start.dir\build.make CMakeFiles/Start.dir/src/create_bd.cpp.s
+.PHONY : src/create_bd.cpp.s
+
 src/del_bd.obj: src/del_bd.cpp.obj
 .PHONY : src/del_bd.obj
 
@@ -260,6 +284,9 @@ help:
 	@echo ... src/add_bd.obj
 	@echo ... src/add_bd.i
 	@echo ... src/add_bd.s
+	@echo ... src/create_bd.obj
+	@echo ... src/create_bd.i
+	@echo ... src/create_bd.s
 	@echo ... src/del_bd.obj
 	@echo ... src/del_bd.i
 	@echo ... src/del_bd.s

@@ -43,7 +43,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     tool_bar->AddSeparator();
     tool_bar->AddTool(wxID_ADD, wxT("Добавить новую запись"), add);
     tool_bar->AddTool(wxID_EDIT, wxT("Редактировать запись"), edit);
-    tool_bar->AddTool(wxID_DELETE, wxT("Удалить"), del);
+    tool_bar->AddTool(wxID_DELETE, wxT("Удалить запись"), del);
     tool_bar->Realize();
 
     Bind(wxEVT_MENU, &Start_Frame::OnNewBD, this, wxID_NEW);

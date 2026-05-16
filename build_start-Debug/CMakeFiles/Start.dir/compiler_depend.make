@@ -1598,6 +1598,7 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/dev/wx/include/wx/msw/slider.h \
   C:/dev/wx/include/wx/msw/statbmp.h \
   C:/dev/wx/include/wx/msw/statbox.h \
+  C:/dev/wx/include/wx/msw/statline.h \
   C:/dev/wx/include/wx/msw/stattext.h \
   C:/dev/wx/include/wx/msw/statusbar.h \
   C:/dev/wx/include/wx/msw/textctrl.h \
@@ -1631,6 +1632,7 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/dev/wx/include/wx/slider.h \
   C:/dev/wx/include/wx/statbmp.h \
   C:/dev/wx/include/wx/statbox.h \
+  C:/dev/wx/include/wx/statline.h \
   C:/dev/wx/include/wx/stattext.h \
   C:/dev/wx/include/wx/statusbr.h \
   C:/dev/wx/include/wx/stockitem.h \
@@ -5400,6 +5402,8 @@ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/bmiintrin.h:
 
 C:/msys64/ucrt64/include/cguid.h:
 
+C:/dev/wx/include/wx/msw/statline.h:
+
 C:/msys64/ucrt64/include/combaseapi.h:
 
 C:/msys64/ucrt64/include/sdks/_mingw_ddk.h:
@@ -5747,6 +5751,8 @@ C:/dev/wx/include/wx/file.h:
 C:/dev/wx/include/wx/filename.h:
 
 C:/devel/start/src/del_bd.cpp:
+
+C:/dev/wx/include/wx/statline.h:
 
 C:/devel/start/src/main.h:
 

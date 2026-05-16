@@ -115,6 +115,11 @@ void Edit_BD::LoadRecord(int id){
                 long item_index = m_list_edit->GetItemCount();
                 m_list_edit->InsertItem(item_index, m_cur_col[i]);
                 m_list_edit->SetItem(item_index, 1, cell_val);                                   //1 так как значение колонки куда мы пишем всегда 1
+                
+                wxString fieldName = m_cur_col[i];
+                if(fieldName == "id" || fieldName == "ID"){
+                    m_list_edit->SetItemBackgroundColour(item_index, wxColour(230, 230, 230));
+                }
             }
         }
         else{
@@ -131,6 +136,11 @@ void Edit_BD::SaveRecord(){
 
     wxString set_change;
     for(size_t i = 0; i < m_cur_col.size(); i ++){
+        wxString col_name = m_cur_col[i];
+        if(col_name == "id" || col_name == "ID"){
+            continue;  // пропускаем ID
+        }
+
         if(i < m_cur_row.size()){
             wxString val = m_cur_row[i];
             val.Replace("'", "''");
@@ -157,6 +167,12 @@ void Edit_BD::SaveRecord(){
 void Edit_BD::OnItemActivated(wxListEvent& event){                  //для двойного нажатия
     int row = event.GetIndex();
     int col = event.GetColumn();
+
+    wxString fieldName = m_cur_col[row];
+    if(fieldName == "id" || fieldName == "ID"){
+        wxMessageBox(wxT("Поле ID нельзя редактировать!"), wxT("Информация"), wxOK);
+        return;
+    }
 
     if(col == 1){
         wxMessageBox(wxT("нельзя редактировать название полей"), wxT("Ошибка"), wxOK | wxICON_ERROR);

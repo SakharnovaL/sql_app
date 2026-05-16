@@ -5,7 +5,7 @@
 
 class Edit_BD : public wxDialog{
 public:
-    Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name);
+    Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int record_id);
 private:
     sqlite3* m_bd;
     const wxString m_table_name;

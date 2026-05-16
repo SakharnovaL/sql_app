@@ -42,7 +42,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     tool_bar->AddTool(wxID_OPEN, wxT("Открыть БД"), open);
     tool_bar->AddSeparator();
     tool_bar->AddTool(wxID_ADD, wxT("Добавить новую запись"), add);
-    tool_bar->AddTool(wxID_EDIT, wxT("Редактировать"), edit);
+    tool_bar->AddTool(wxID_EDIT, wxT("Редактировать запись"), edit);
     tool_bar->AddTool(wxID_DELETE, wxT("Удалить"), del);
     tool_bar->Realize();
 
@@ -159,10 +159,25 @@ void Start_Frame::OnEditBD(wxCommandEvent& event){
         wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
         return;
     }
-    wxString table_name = m_table_choice->GetString(event.GetSelection());
-    Edit_BD dlg(this, m_bd, table_name);                     // создаём диалог
+    long selectedRow = m_list->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
+    
+    if(selectedRow == -1){
+        wxMessageBox(wxT("Выберите запись для редактирования!"), wxT("Информация"), wxOK | wxICON_INFORMATION);
+        return;
+    }
+    
+    wxString idStr = m_list->GetItemText(selectedRow, 0);
+    long recordId;
+    if(!idStr.ToLong(&recordId)){
+        wxMessageBox(wxT("Не удалось определить ID записи!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+    
+    wxString table_name = m_table_choice->GetString(m_table_choice->GetSelection());
+    
+    Edit_BD dlg(this, m_bd, table_name, (int)recordId);
     if(dlg.ShowModal() == wxID_OK){
-        LoadTableData(table_name);
+        LoadTableData(table_name);  // обновляем таблицу
     }
 }
 

@@ -4,14 +4,14 @@
 #include "edit_bd.h"
 
 
-Edit_BD::Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wxDialog(parent, wxID_ANY, wxT("редактирование записи"), wxDefaultPosition, wxSize(400, 200)), m_bd(bd), m_table_name(table_name), m_id(-1), m_col(){
+Edit_BD::Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int record_id) : wxDialog(parent, wxID_ANY, wxT("редактирование записи"), wxDefaultPosition, wxSize(400, 300)), m_bd(bd), m_table_name(table_name), m_id(record_id), m_col(){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
     
     wxBoxSizer* text_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* text_label = new wxStaticText(panel, wxID_ANY, wxT("редактирование записи"));
     text_sizer->Add(text_label);
-    main_sizer->Add(text_sizer);
+    main_sizer->Add(text_sizer, 0, wxALL | wxALIGN_CENTER, 10);
 
     m_list_edit = new wxListCtrl(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES | wxLC_EDIT_LABELS | wxLC_SINGLE_SEL);
     m_list_edit->InsertColumn(0, wxT("поле"));
@@ -26,7 +26,7 @@ Edit_BD::Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wx
 
     wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("сохранить"));
-    ok_btn->Bind(wxEVT_BUTTON, &Edit_BD::OnSaveClic, this);
+    ok_btn->Bind(wxEVT_BUTTON, &Edit_BD::OnOk, this);
     wxButton* cancel_btn = new wxButton(panel, wxID_CANCEL, wxT("отмена"));
     btn_sizer->Add(ok_btn, 0, wxALL, 5);
     btn_sizer->Add(cancel_btn, 0, wxALL, 5);
@@ -168,7 +168,7 @@ void Edit_BD::OnItemActivated(wxListEvent& event){                  //для д�
         wxString new_val = dlg.GetValue();
         m_list_edit->SetItem(row, 1, new_val);
 
-        if(row , (int)m_cur_row.size()){
+        if(row >= 0 && row < (int)m_cur_row.size()){
             m_cur_row[row] = new_val;
         }
     }

@@ -3,7 +3,7 @@
 #include <sqlite3.h>
 #include <wx/listctrl.h>
 
-Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wxDialog(parent, wxID_ANY, wxT("добавление новой записи"), wxDefaultPosition, wxSize(400, 200)), m_bd(bd), m_table_name(table_name), m_id(-1), m_col(){
+Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wxDialog(parent, wxID_ANY, wxT("добавление новой записи"), wxDefaultPosition, wxSize(500, 400)), m_bd(bd), m_table_name(table_name), m_id(-1), m_col(){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -21,6 +21,10 @@ Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name
 
     LoadTableStruct();
 
+    long idIndex = m_list_add->InsertItem(0, wxT("id"));
+    m_list_add->SetItem(idIndex, 1, wxString::Format("%d", m_nextId));
+    m_list_add->SetItemBackgroundColour(idIndex, wxColour(240, 240, 240));
+
     m_list_add->Bind(wxEVT_LIST_ITEM_ACTIVATED, &Add_New_BD::OnItemActivated, this);
 
     wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
@@ -34,6 +38,21 @@ Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name
     panel->SetSizer(main_sizer);
 };
 
+int Add_New_BD::GetNextId(){
+    int maxId = 0;
+    wxString sql = wxString::Format("SELECT MAX(id) FROM %s;", m_table_name);
+    
+    sqlite3_stmt* stmt;
+    if(sqlite3_prepare_v2(m_bd, sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+        if(sqlite3_step(stmt) == SQLITE_ROW){
+            maxId = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+    }
+    
+    return maxId + 1;
+}
+
 void Add_New_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
     AddRecord();
     m_saved = true;
@@ -41,6 +60,7 @@ void Add_New_BD::OnOk(wxCommandEvent& event){                                   
 };
 
 void Add_New_BD::LoadTableStruct(){
+    m_nextId = GetNextId();
     wxString col_tab = wxString::Format("PRAGMA table_info(%s);", m_table_name);
 
     sqlite3_stmt* stmt;
@@ -49,12 +69,14 @@ void Add_New_BD::LoadTableStruct(){
             const char* col_name = (const char*)sqlite3_column_text(stmt, 1);
             if(col_name){
                 wxString col = wxString::FromUTF8(col_name);
-                m_cur_col.push_back(col);
-                m_cur_row.push_back("");
+                if(col != "id" && col != "ID"){
+                    m_cur_col.push_back(col);
+                    m_cur_row.push_back("");
 
-                long item_index = m_list_add->GetItemCount();
-                m_list_add->InsertItem(item_index, col);
-                m_list_add->SetItem(item_index, 1, "");
+                    long item_index = m_list_add->GetItemCount();
+                    m_list_add->InsertItem(item_index, col);
+                    m_list_add->SetItem(item_index, 1, "");
+                }
             }
         }
         sqlite3_finalize(stmt);
@@ -65,19 +87,29 @@ void Add_New_BD::OnItemActivated(wxListEvent& event){                  //для 
     int row = event.GetIndex();
     int col = event.GetColumn();
 
-    if(col == 1){
+    wxString fieldName = m_list_add->GetItemText(row, 0);
+    if(fieldName == "id" || fieldName == "ID"){
+        wxMessageBox(wxT("Поле ID генерируется автоматически"), wxT("Информация"), wxOK);
+        return;
+    }
+
+    if(col == 0){
         wxMessageBox(wxT("нельзя редактировать название полей"), wxT("Ошибка"), wxOK | wxICON_ERROR);
         return;
     }
     wxString cur_val = m_list_add->GetItemText(row, 1);
-    wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), m_cur_col[row]), wxT("Редактирование"), cur_val);
+    wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), fieldName), wxT("Редактирование"), cur_val);
     if(dlg.ShowModal() == wxID_OK){
         wxString new_val = dlg.GetValue();
         m_list_add->SetItem(row, 1, new_val);
 
-        if(row , (int)m_cur_row.size()){
-            m_cur_row[row] = new_val;
+        int data_index = row - 1;
+        if(data_index >= 0 && data_index< (int)m_cur_row.size()){
+            m_cur_row[data_index] = new_val;
         }
+        else{
+        wxMessageBox(wxT("Редактировать можно только поле 'Значение'"), wxT("Информация"), wxOK);
+        }   
     }
 }
 

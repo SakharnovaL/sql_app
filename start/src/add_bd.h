@@ -15,9 +15,11 @@ private:
     std::vector<wxString> m_cur_row;        //значение полей
     std::vector<wxString> m_cur_col;        //имена полей
     bool m_saved;
+    int m_nextId;
 
     void OnOk(wxCommandEvent& event);
     void LoadTableStruct();
     void OnItemActivated(wxListEvent& event);
     void AddRecord();
+    int GetNextId();
 };

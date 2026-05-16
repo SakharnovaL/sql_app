@@ -5,7 +5,7 @@
 #include <wx/filename.h>
 #include <vector>
 
-Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 200)), m_bd(nullptr), m_nameBD(nullptr), m_pathBD(nullptr), m_list_create(nullptr){
+Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 300)), m_bd(nullptr), m_nameBD(nullptr), m_pathBD(nullptr), m_list_create(nullptr){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);                                            //создание общего бокса куда запихаем все состовляющие окна
 
@@ -18,7 +18,7 @@ Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Соз�
 
     wxBoxSizer* path_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* path_lable = new wxStaticText(panel, wxID_ANY, wxT("выберете путь:"));            //статичный текст
-    m_pathBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());                                         //поле куда можно вписать путь бд, wxGetCwd() возвращает текущий рабочий каталог - значение по умолчанию
+    m_pathBD = new wxTextCtrl(panel, wxID_ANY, wxT("C:/devel/start/tables"));                                         //поле куда можно вписать путь бд, wxGetCwd() возвращает текущий рабочий каталог - значение по умолчанию
     wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
     browse_btn->Bind(wxEVT_BUTTON, &Create_BD::OnBrowse, this);                              //подключение кнопки, она очень волшебная, я хуй знает как она работает
     path_sizer->Add(path_lable);
@@ -70,7 +70,7 @@ void Create_BD::OnAddCol(wxCommandEvent& event){
         if(col_name.IsEmpty() == false){
             int col_cnt = m_list_create->GetColumnCount();
             m_list_create->InsertColumn(col_cnt, col_name);
-            m_list_create->SetColumnWidth(col_cnt, 120);
+            m_list_create->SetColumnWidth(col_cnt, 100);
             m_col_name.push_back(col_name);
             int rowCount = m_list_create->GetItemCount();
 
@@ -97,6 +97,11 @@ void Create_BD::OnCellEdit(wxListEvent& event){
     int row = event.GetIndex();
     int col = event.GetColumn();
     
+    if(col == 0){
+        wxMessageBox(wxT("Поле ID генерируется автоматически"), wxT("Информация"), wxOK);
+        return;
+    }
+
     if(row < 0 || row >= m_list_create->GetItemCount()) return;
 
     wxString idStr = m_list_create->GetItemText(row, 0);
@@ -129,6 +134,10 @@ void Create_BD::OnCellEdit(wxListEvent& event){
         
         long index = fieldList->InsertItem(c, fieldName);
         fieldList->SetItem(index, 1, fieldValue);
+
+         if(fieldName == "id" || fieldName == "ID"){
+            fieldList->SetItemBackgroundColour(index, wxColour(230, 230, 230));
+        }
     }
     
     mainSizer->Add(fieldList, 1, wxALL | wxEXPAND, 10);
@@ -148,6 +157,11 @@ void Create_BD::OnCellEdit(wxListEvent& event){
         wxString cur_val = fieldList->GetItemText(r, 1);
         wxString fieldName = fieldList->GetItemText(r, 0);
         
+        if(fieldName == "id" || fieldName == "ID"){
+            wxMessageBox(wxT("Поле ID нельзя редактировать!"), wxT("Информация"), wxOK);
+            return;
+        }
+
         wxTextEntryDialog dlg(nullptr, wxString::Format(wxT("Введите значение для поля '%s':"), fieldName), wxT("Редактирование"), cur_val);
         if(dlg.ShowModal() == wxID_OK){
             fieldList->SetItem(r, 1, dlg.GetValue());
@@ -156,6 +170,21 @@ void Create_BD::OnCellEdit(wxListEvent& event){
     
     if(editDialog.ShowModal() == wxID_OK){
         for(int c = 0; c < colCount; c++){
+            wxString fieldName;
+            if(c < (int)m_col_name.size()){
+                fieldName = m_col_name[c];
+            } else {
+                wxListItem item;
+                item.SetMask(wxLIST_MASK_TEXT);
+                item.SetId(c);
+                m_list_create->GetColumn(c, item);
+                fieldName = item.GetText();
+            }
+            
+            if(fieldName == "id" || fieldName == "ID"){
+                continue;  // ПРОПУСКАЕМ ID
+            }
+            
             wxString newValue = fieldList->GetItemText(c, 1);
             m_list_create->SetItem(row, c, newValue);
         }
@@ -192,12 +221,17 @@ std::vector<wxString> Create_BD::GetColumnNAme(){
     int col_cnt = m_list_create->GetColumnCount();
 
     for(int i = 1; i < col_cnt; i++){
-        wxListItem item;
-        item.SetMask(wxLIST_MASK_TEXT);
-        item.SetId(i);
-        item.SetColumn(i);
-        m_list_create->GetColumn(i, item);
-        col.push_back(item.GetText());
+        if(i < (int)m_col_name.size()){
+            col.push_back(m_col_name[i]);
+        }
+        else{
+            wxListItem item;
+            item.SetMask(wxLIST_MASK_TEXT);
+            item.SetId(i);
+            item.SetColumn(i);
+            m_list_create->GetColumn(i, item);
+            col.push_back(item.GetText());
+        }
     }
     return col;
 }

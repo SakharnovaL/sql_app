@@ -28,12 +28,10 @@ Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Соз�
 
     m_list_create = new wxListCtrl(panel, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLC_REPORT | wxLC_HRULES | wxLC_VRULES | wxLC_SINGLE_SEL);
     m_list_create->InsertColumn(0, wxT("id"));
-    //m_list_create->InsertItem(0, wxT("1"));
     m_col_name.clear();
     m_col_name.push_back("id");
     m_list_create->Bind(wxEVT_LIST_ITEM_ACTIVATED, &Create_BD::OnCellEdit, this);
     m_list_create->Bind(wxEVT_LIST_COL_CLICK, &Create_BD::OnColEdit, this);
-    //m_list_create->Bind(wxEVT_LIST_END_LABEL_EDIT, &Create_BD::OnItemActivated, this);
     main_sizer->Add(m_list_create, 1, wxALL | wxEXPAND);
 
     wxBoxSizer* control_btn = new wxBoxSizer(wxHORIZONTAL);

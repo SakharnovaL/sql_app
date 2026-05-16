@@ -19,13 +19,9 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
     file_menu->Append(wxID_NEW, _T("&Новая БД\tCtrl-N"), _T("Создать новую базу данных"));
     file_menu->Append(wxID_OPEN, _T("&Открыть БД\tCtrl-O"), _T("Открыть существующую БД"));
     file_menu->AppendSeparator();
-    file_menu->Append(wxID_EXIT, _T("Выход\tAlt-F4"), _T("Выход из программы"));
-    about_menu->Append(wxID_ABOUT, _T("О программе"), _T("Информация о программе"));
     
     wxMenuBar *menu_bar = new wxMenuBar();
     menu_bar->Append(file_menu, wxT("&Файл"));
-    menu_bar->Append(edit_menu, wxT("&Правка"));
-    menu_bar->Append(about_menu, wxT("&Справка"));
     SetMenuBar(menu_bar);
 
     wxImage::AddHandler(new wxPNGHandler());

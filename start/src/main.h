@@ -23,6 +23,7 @@ private:
     sqlite3* m_bd;
     wxListCtrl* m_list;
     wxChoice* m_table_choice;
+    wxStaticText* m_dbNameLabel;
 
     void LoadTables();
     void LoadTableData(const wxString& table_name);

@@ -22,7 +22,7 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
 
     wxBoxSizer* choose_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* choose_label = new wxStaticText(panel, wxID_ANY, wxT("или выберете файл"));
-    m_chooseBD = new wxTextCtrl(panel, wxID_ANY, wxGetCwd());
+    m_chooseBD = new wxTextCtrl(panel, wxID_ANY, wxT("C:/devel/start/tables"));
     wxButton* browse_btn = new wxButton(panel, wxID_ANY, wxT("обзор"));
     browse_btn->Bind(wxEVT_BUTTON, &Open_BD::OnBrowse, this);
     choose_sizer->Add(choose_label, 0, wxALIGN_CENTER_VERTICAL | wxRIGHT, 5);
@@ -30,8 +30,8 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
     choose_sizer->Add(browse_btn, 0);
     main_sizer->Add(choose_sizer, 0, wxALL | wxEXPAND, 10);
     
-    m_info = new wxStaticText(panel, wxID_ANY, wxT("информация о бд появится здесь"));
     wxStaticBox* info_box = new wxStaticBox(panel, wxID_ANY, wxT("информация о бд"));
+    m_info = new wxStaticText(info_box, wxID_ANY, wxT("информация о бд появится здесь"));
     wxStaticBoxSizer* info_sizer = new wxStaticBoxSizer(info_box, wxVERTICAL);
     info_sizer->Add(m_info, 1, wxLEFT | wxEXPAND, 10);
     main_sizer->Add(info_sizer, 1, wxALL | wxEXPAND, 10);

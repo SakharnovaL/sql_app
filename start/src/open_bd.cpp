@@ -13,12 +13,7 @@ Open_BD::Open_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("откры�
     text_sizer->AddStretchSpacer();
     text_sizer->Add(text_label, 0, wxALIGN_CENTER);                                                                                //надо сделать посередине окна
     text_sizer->AddStretchSpacer();
-    main_sizer->Add(text_sizer, 0, wxALL | wxEXPAND, 10);
-
-    wxBoxSizer* last_sizer = new wxBoxSizer(wxHORIZONTAL);
-    wxStaticText* last_label = new wxStaticText(panel, wxID_ANY, wxT("последние баззы данных"));                //надо добавить окно с последними выбранными бд
-    last_sizer->Add(last_label, 0, wxLEFT | wxBOTTOM, 5);
-    main_sizer->Add(last_sizer, 0, wxALL | wxEXPAND, 10);
+    main_sizer->Add(text_sizer, 0, wxALL | wxEXPAND, 15);
 
     wxBoxSizer* choose_sizer = new wxBoxSizer(wxHORIZONTAL);
     wxStaticText* choose_label = new wxStaticText(panel, wxID_ANY, wxT("или выберете файл"));
@@ -77,7 +72,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
                     sqlite3_finalize(stmt);                         //очищает подготовленный запрос, чтоб программа не умерла
                 }
                 sqlite3_close(bd);
-                info += wxT("таблиц: ") + wxString::Format("%d", table_cnt);
+                info += wxT("таблиц: ") + wxString::Format("%d", table_cnt - 1);
             }
             m_info->SetLabel(info);
         }

@@ -98,7 +98,7 @@ Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id
 void Del_BD::OnDelete(wxCommandEvent& event){
     wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d;", get_table_name(), m_id);
     
-    if(make_sql(sql, nullptr, nullptr) != true){
+    if((*this)(sql, nullptr, nullptr) != true){
         show_error(wxString::Format(wxT("Ошибка удаления:\n%s")));
         set_succsess(false);
         EndModal(wxID_CANCEL);

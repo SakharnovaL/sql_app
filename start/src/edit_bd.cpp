@@ -155,9 +155,8 @@ void Edit_BD::SaveRecord(){
     }
 
     wxString sql = wxString::Format("UPDATE %s SET %s WHERE rowid = %d;", m_table_name, set_change, m_id);
-    //char* err_msg = nullptr;
-    //int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
-    if(make_sql(sql, nullptr, nullptr) != true){
+    
+    if((*this)(sql, nullptr, nullptr) != true){
         show_error(wxString::Format(wxT("Ошибка сохранения:\n%s")));
     }
     else{

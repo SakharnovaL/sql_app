@@ -152,7 +152,7 @@ void Add_New_BD::AddRecord(){
     }
 
     wxString sql = wxString::Format("INSERT INTO %s (%s) VALUES (%s);", get_table_name(), col, val);
-    if(make_sql(sql, nullptr, nullptr) != true){
+    if((*this)(sql, nullptr, nullptr) != true){
         show_error(wxString::Format(wxT("Ошибка добавления записи:\n%s")));
         set_succsess(false);
     } 

@@ -57,6 +57,8 @@ public:
         }
         return true;
     }
+
+    bool operator()(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){return make_sql(sql, callback, data);}
 };
 
 #endif

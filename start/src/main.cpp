@@ -252,8 +252,9 @@ void Start_Frame::LoadTables(){
     if(m_list){
         m_list->ClearAll();
     }
-
-    if(make_sql("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';", GetTablesCallback, m_table_choice) != true){
+    
+    wxString sql = "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';";
+    if((*this)(sql, GetTablesCallback, m_table_choice) != true){
         return;
     }
 
@@ -289,7 +290,7 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
 
     wxString col_tab = wxString::Format("PRAGMA table_info(%s);", table_name);      //sql запрос, format - принимает строку как printf в с, PRAGMA table_info передает название колонки и какой тип данных в нем хранится и еще какую-то парашу, которая мне не особо нужна
     std::vector<wxString> col;
-    if(make_sql(col_tab.ToUTF8(), get_col_callback, &col) != true){
+    if((*this)(col_tab, get_col_callback, &col) != true){
         show_error("Не удалось получить структуру таблицы");
         return;
     }
@@ -304,7 +305,8 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
         }
     }
 
-    if(make_sql(wxString::Format("SELECT * FROM %s", table_name), DisplayTableCallback, m_list) != true){
+    wxString sql = wxString::Format("SELECT * FROM %s", table_name);
+    if((*this)(sql, DisplayTableCallback, m_list) != true){
         return;
     }
 

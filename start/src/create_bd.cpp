@@ -281,7 +281,7 @@ bool Create_BD::CreateBD(){
 
     //char* err_msg = nullptr;
     //rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
-    if(make_sql(sql, nullptr, nullptr) != true){
+    if((*this)(sql, nullptr, nullptr) != true){
         show_error(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), sql));
         close_bd();
         return false;
@@ -318,7 +318,7 @@ bool Create_BD::CreateBD(){
 
         wxString insert_sql = wxString::Format("INSERT INTO %s (%s) VALUES (%s);", table_name, col_list, values);
         //rc = sqlite3_exec(m_bd, insert_sql.ToUTF8(), nullptr, nullptr, &err_msg);
-        if(make_sql(insert_sql, nullptr, nullptr) != true){
+        if((*this)(insert_sql, nullptr, nullptr) != true){
             show_error(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), insert_sql));
         }
     }

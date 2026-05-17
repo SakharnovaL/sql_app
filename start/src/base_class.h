@@ -60,6 +60,10 @@ public:
 
     bool operator()(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){return make_sql(sql, callback, data);}
     wxString operator+(const wxString& sql_part) const {return wxString::Format("SELECT * FROM %s %s", m_table_name, sql_part);}
+    bool operator-(int id){
+        wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d", m_table_name, id);
+        return make_sql(sql);
+    }
 };
 
 #endif

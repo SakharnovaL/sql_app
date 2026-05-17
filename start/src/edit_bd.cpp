@@ -97,7 +97,8 @@ void Edit_BD::LoadRecord(int id){
     m_list_edit->DeleteAllItems();
     m_cur_row.clear();
 
-    wxString sql = wxString::Format("SELECT * FROM %s WHERE rowid = %d;", get_table_name(), id);
+    set_table_name(get_table_name());
+    wxString sql = *this + wxString::Format("WHERE rowid = %d;", id);
 
     sqlite3_stmt* stmt;
     if(sqlite3_prepare_v2(get_bd(), sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){

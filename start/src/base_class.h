@@ -59,6 +59,7 @@ public:
     }
 
     bool operator()(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){return make_sql(sql, callback, data);}
+    wxString operator+(const wxString& sql_part) const {return wxString::Format("SELECT * FROM %s %s", m_table_name, sql_part);}
 };
 
 #endif

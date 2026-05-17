@@ -155,6 +155,7 @@ void Start_Frame::OnEditBD(wxCommandEvent& event){
     }
     
     wxString table_name = m_table_choice->GetString(m_table_choice->GetSelection());
+    set_table_name(table_name);
     
     Edit_BD dlg(this, m_bd, table_name, (int)recordId);
     if(dlg.ShowModal() == wxID_OK){
@@ -283,6 +284,8 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
         return;
     }
 
+    set_table_name(table_name);
+
     m_list->ClearAll();
     while(m_list->GetColumnCount() > 0){
         m_list->DeleteColumn(0);
@@ -305,7 +308,7 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
         }
     }
 
-    wxString sql = wxString::Format("SELECT * FROM %s", table_name);
+    wxString sql = *this + "";
     if((*this)(sql, DisplayTableCallback, m_list) != true){
         return;
     }

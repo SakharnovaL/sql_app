@@ -45,7 +45,7 @@ Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id
     wxStaticBox* info_box = new wxStaticBox(panel, wxID_ANY, wxT("Информация о записи"));
     wxStaticBoxSizer* info_box_sizer = new wxStaticBoxSizer(info_box, wxVERTICAL);
     
-    wxString info_text = wxString::Format(wxT("Таблица: %s\nID записи: %d"), m_table_name, m_id);
+    wxString info_text = wxString::Format(wxT("ID записи: %d"), m_id);
     wxStaticText* info_label = new wxStaticText(panel, wxID_ANY, info_text);
     info_label->SetForegroundColour(wxColour(80, 80, 80));
     info_box_sizer->Add(info_label, 0, wxALL | wxALIGN_CENTER, 10);
@@ -92,18 +92,33 @@ Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id
 };
 
 void Del_BD::OnDelete(wxCommandEvent& event){
-    wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d;", m_table_name, m_id);
-
+    wxString maxIdSql = wxString::Format("SELECT MAX(id) FROM %s", m_table_name);
+    int maxId = 0;
+    sqlite3_stmt* stmt;
+    if(sqlite3_prepare_v2(m_bd, maxIdSql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+        if(sqlite3_step(stmt) == SQLITE_ROW){
+            maxId = sqlite3_column_int(stmt, 0);
+        }
+        sqlite3_finalize(stmt);
+    }
+    
+    // Удаляем запись
+    wxString sql = wxString::Format("DELETE FROM %s WHERE id = %d", m_table_name, m_id);
     char* err_msg = nullptr;
     int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
+    
     if(rc != SQLITE_OK){
-        wxMessageBox(wxString::Format(wxT("Ошибка удаления:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        wxMessageBox(wxString::Format(wxT("Ошибка удаления: %s"), wxString::FromUTF8(err_msg)));
         sqlite3_free(err_msg);
-        m_deleted = false;
         EndModal(wxID_CANCEL);
+        return;
     }
-    else{
-        m_deleted = true;
-        EndModal(wxID_OK);
+    
+    // Если удалили последнюю запись, сбрасываем счетчик
+    if(m_id == maxId && maxId > 0){
+        wxString resetSql = wxString::Format("UPDATE sqlite_sequence SET seq = %d WHERE name = '%s'", maxId - 1, m_table_name);
+        sqlite3_exec(m_bd, resetSql.ToUTF8(), nullptr, nullptr, nullptr);
     }
+
+    EndModal(wxID_OK);
 }

@@ -73,7 +73,7 @@ void Edit_BD::LoadRecord(int id){
     }
 
     if(id == -1){
-        wxString count_sql = wxString::Format("SELECT MIN(rowid) FROM %s", m_table_name);
+        wxString count_sql = wxString::Format("SELECT MIN(id) FROM %s", m_table_name);
         sqlite3_stmt* stmt;                                                                     //указатель на заготовленный sql запрос, сюда записывается результат sql запроса
         if(sqlite3_prepare_v2(m_bd, count_sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
             if(sqlite3_step(stmt) == SQLITE_ROW){
@@ -94,7 +94,7 @@ void Edit_BD::LoadRecord(int id){
     m_list_edit->DeleteAllItems();
     m_cur_row.clear();
 
-    wxString sql = wxString::Format("SELECT * FROM %s WHERE rowid = %d;", m_table_name, id);
+    wxString sql = wxString::Format("SELECT * FROM %s WHERE id = %d;", m_table_name, id);
 
     sqlite3_stmt* stmt;
     if(sqlite3_prepare_v2(m_bd, sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
@@ -151,7 +151,7 @@ void Edit_BD::SaveRecord(){
         }
     }
 
-    wxString sql = wxString::Format("UPDATE %s SET %s WHERE rowid = %d;", m_table_name, set_change, m_id);
+    wxString sql = wxString::Format("UPDATE %s SET %s WHERE id = %d;", m_table_name, set_change, m_id);
     char* err_msg = nullptr;
     int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
     if(rc != SQLITE_OK){

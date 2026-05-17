@@ -59,7 +59,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
             info += wxT("имя: ") + fileInfo.GetFullName() + "\n";
             info += wxT("путь: ") + fileInfo.GetFullPath() + "\n";
             info += wxT("размер: ") + wxString::Format("%.2f KB", fileInfo.GetSize().GetValue() / 1024.0) + "\n";
-            info += wxT("создана: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S") + "\n";
+            info += wxT("последнее изменение: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S") + "\n";
 
             sqlite3* bd = nullptr;
             if(open_bd(file) == true){      //открываем бд
@@ -72,7 +72,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
                     sqlite3_finalize(stmt);                         //очищает подготовленный запрос, чтоб программа не умерла
                 }
                 sqlite3_close(bd);
-                info += wxT("таблиц: ") + wxString::Format("%d", table_cnt - 1);
+                info += wxT("таблиц: ") + wxString::Format("%d", table_cnt + 1);
             }
             m_info->SetLabel(info);
         }

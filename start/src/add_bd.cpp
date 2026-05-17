@@ -40,14 +40,30 @@ Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name
 
 int Add_New_BD::GetNextId(){
     int maxId = 0;
-    wxString sql = wxString::Format("SELECT MAX(id) FROM %s;", m_table_name);
     
+    // Получаем текущее значение счетчика из sqlite_sequence
+    wxString seqSql = wxString::Format("SELECT seq FROM sqlite_sequence WHERE name = '%s'", m_table_name);
     sqlite3_stmt* stmt;
-    if(sqlite3_prepare_v2(m_bd, sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    if(sqlite3_prepare_v2(m_bd, seqSql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         if(sqlite3_step(stmt) == SQLITE_ROW){
             maxId = sqlite3_column_int(stmt, 0);
         }
         sqlite3_finalize(stmt);
+    }
+    
+    // Если таблица пустая, sqlite_sequence не возвращает запись
+    if(maxId == 0){
+        // Проверяем, есть ли записи в таблице
+        wxString countSql = wxString::Format("SELECT COUNT(*) FROM %s", m_table_name);
+        if(sqlite3_prepare_v2(m_bd, countSql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+            if(sqlite3_step(stmt) == SQLITE_ROW){
+                int count = sqlite3_column_int(stmt, 0);
+                if(count == 0){
+                    return 1;  // Первая запись
+                }
+            }
+            sqlite3_finalize(stmt);
+        }
     }
     
     return maxId + 1;

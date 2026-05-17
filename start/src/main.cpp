@@ -83,51 +83,36 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
 void Start_Frame::OpenBD(const wxString& dbPath){
     if(dbPath.IsEmpty()){
-        wxMessageBox(wxT("путь к бд пуст"), wxT("ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Путь к БД пуст"));
         return;
     }
 
     if(wxFileName::FileExists(dbPath) == false){
-        wxMessageBox(wxT("бд не существует"), wxT("ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Базы данных не существует"));
         return;
     }
 
-    if(m_bd){
-        sqlite3_close(m_bd);
-        m_bd = nullptr;
-    }
+    close_bd();
     
-    int result = sqlite3_open(dbPath.ToUTF8(), &m_bd);
-
-    if(result != SQLITE_OK){
-        wxMessageBox(wxT("Не удалось открыть базу данных"), wxT("ошибка"), wxOK | wxICON_ERROR);
-        m_bd = nullptr;
-        return;
-    }
-
-    wxFileName fileName(dbPath);
-    if(m_dbNameLabel){
+    if(open_bd(dbPath)){
+        wxFileName fileName(dbPath);
         m_dbNameLabel->SetLabel(fileName.GetFullName());
         m_dbNameLabel->SetForegroundColour(wxColour(0, 150, 0));
-    }
-    
-    if(m_table_choice){
+
         m_table_choice->Enable(true);
         m_table_choice->Clear();
-    }
-    
-    if(m_list){
         m_list->ClearAll();
-    }
 
-    LoadTables();
+        LoadTables();
+    }
+    else{
+        show_error(wxT("Не удалось открыть базу данных"));
+    }
 }
 
 void Start_Frame::OnNewBD(wxCommandEvent& event){
     Create_BD dlg(this);                     // создаём диалог
-    if(dlg.ShowModal() == wxID_OK){                 // показываем его
-
-    }
+    dlg.ShowModal();
 }
 
 void Start_Frame::OnOpenBD(wxCommandEvent& event){
@@ -140,7 +125,7 @@ void Start_Frame::OnOpenBD(wxCommandEvent& event){
 
 void Start_Frame::OnAddNewBD(wxCommandEvent& event){
     if(m_bd == nullptr){
-        wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("База данных не открыта!"));
         return;
     }
     wxString table_name = m_table_choice->GetString(event.GetSelection());
@@ -152,20 +137,20 @@ void Start_Frame::OnAddNewBD(wxCommandEvent& event){
 
 void Start_Frame::OnEditBD(wxCommandEvent& event){
     if(m_bd == nullptr){
-        wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("База данных не открыта!"));
         return;
     }
     long selectedRow = m_list->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
     
     if(selectedRow == -1){
-        wxMessageBox(wxT("Выберите запись для редактирования!"), wxT("Информация"), wxOK | wxICON_INFORMATION);
+        show_error(wxT("Выберите запись для редактирования!"));
         return;
     }
     
     wxString idStr = m_list->GetItemText(selectedRow, 0);
     long recordId;
     if(!idStr.ToLong(&recordId)){
-        wxMessageBox(wxT("Не удалось определить ID записи!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Не удалось определить ID записи!"));
         return;
     }
     
@@ -179,25 +164,25 @@ void Start_Frame::OnEditBD(wxCommandEvent& event){
 
 void Start_Frame::OnDelBd(wxCommandEvent& event){
     if(m_bd == nullptr){
-        wxMessageBox(wxT("База данных не открыта!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("База данных не открыта!"));
         return;
     }
 
     if(m_table_choice->GetCount() == 0){
-        wxMessageBox(wxT("Нет таблиц для удаления записей!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Нет таблиц для удаления записей!"));
         return;
     }
 
     long sel_row = m_list->GetNextItem(-1, wxLIST_NEXT_ALL, wxLIST_STATE_SELECTED);
     if(sel_row == -1){
-        wxMessageBox(wxT("Выберите запись для удаления!"), wxT("Информация"), wxOK | wxICON_INFORMATION);
+        show_error(wxT("Выберите запись для удаления!"));
         return;
     }
 
     wxString id = m_list->GetItemText(sel_row, 0);
     long rec_id;                                    //нужен чтоб преобразовать из строчки число, в wxListCtrl хранятся только строчки
     if(id.ToLong(&rec_id) == false){
-        wxMessageBox(wxT("Не удалось определить ID записи!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Не удалось определить ID записи!"));
         return;
     }
 
@@ -260,7 +245,7 @@ void Start_Frame::LoadTables(){
     m_table_choice->Clear();
 
     if(m_bd == nullptr){
-        wxMessageBox(wxT("LoadTables: m_bd == nullptr"), wxT("Ошибка"), wxOK);
+        show_error(wxT("База данных не открыта"));
         return;
     }
 
@@ -268,12 +253,8 @@ void Start_Frame::LoadTables(){
         m_list->ClearAll();
     }
 
-    char* err_msg = nullptr;
-    int rc = sqlite3_exec(m_bd, "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';", GetTablesCallback, m_table_choice, &err_msg);         //вызывает GetTablesCallback для каждой найденной таблицы
-
-    if(rc != SQLITE_OK){
-        wxMessageBox(wxString::FromUTF8(err_msg), wxT("ошибка"), wxOK | wxICON_ERROR);
-        sqlite3_free(err_msg);
+    if(make_sql("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%';", GetTablesCallback, m_table_choice) != true){
+        return;
     }
 
     if(m_table_choice->GetCount() > 0){
@@ -308,9 +289,8 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
 
     wxString col_tab = wxString::Format("PRAGMA table_info(%s);", table_name);      //sql запрос, format - принимает строку как printf в с, PRAGMA table_info передает название колонки и какой тип данных в нем хранится и еще какую-то парашу, которая мне не особо нужна
     std::vector<wxString> col;
-    int rc = sqlite3_exec(m_bd, col_tab.ToUTF8(), get_col_callback, &col, nullptr);          //заполняется вектор col названиями столбцов бд
-    if(rc != SQLITE_OK){
-        wxMessageBox(wxT("Не удалось получить структуру таблицы"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+    if(make_sql(col_tab.ToUTF8(), get_col_callback, &col) != true){
+        show_error("Не удалось получить структуру таблицы");
         return;
     }
 
@@ -324,10 +304,9 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
         }
     }
 
-    wxString table = wxString::Format("SELECT * FROM %s", table_name);              //забираем все данные из таблицы, за исключением названия столбцов
-    
-    char* err_msg = nullptr;
-    sqlite3_exec(m_bd, table.ToUTF8(), DisplayTableCallback, m_list, &err_msg);
+    if(make_sql(wxString::Format("SELECT * FROM %s", table_name), DisplayTableCallback, m_list) != true){
+        return;
+    }
 
     for(size_t i = 1; i < col.size(); i++){
         m_list->SetColumnWidth(i, wxLIST_AUTOSIZE);

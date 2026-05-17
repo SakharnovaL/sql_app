@@ -713,7 +713,8 @@ CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:/devel/start/src/add_bd.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
-  C:/devel/start/src/add_bd.h
+  C:/devel/start/src/add_bd.h \
+  C:/devel/start/src/base_class.h
 
 CMakeFiles/Start.dir/src/create_bd.cpp.obj: C:/devel/start/src/create_bd.cpp \
   C:/dev/wx/include/wx/accel.h \
@@ -1430,6 +1431,7 @@ CMakeFiles/Start.dir/src/create_bd.cpp.obj: C:/devel/start/src/create_bd.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
+  C:/devel/start/src/base_class.h \
   C:/devel/start/src/create_bd.h
 
 CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
@@ -2146,6 +2148,7 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
+  C:/devel/start/src/base_class.h \
   C:/devel/start/src/del_bd.h
 
 CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp \
@@ -2860,6 +2863,7 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
+  C:/devel/start/src/base_class.h \
   C:/devel/start/src/edit_bd.h
 
 CMakeFiles/Start.dir/src/main.cpp.obj: C:/devel/start/src/main.cpp \
@@ -3578,6 +3582,7 @@ CMakeFiles/Start.dir/src/main.cpp.obj: C:/devel/start/src/main.cpp \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h \
   C:/devel/start/src/add_bd.h \
+  C:/devel/start/src/base_class.h \
   C:/devel/start/src/create_bd.h \
   C:/devel/start/src/del_bd.h \
   C:/devel/start/src/edit_bd.h \
@@ -5735,6 +5740,8 @@ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/x86intrin.h:
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xmmintrin.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xopintrin.h:
+
+C:/devel/start/src/base_class.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsaveoptintrin.h:
 

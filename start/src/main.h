@@ -1,6 +1,7 @@
 #include <wx/wx.h>
 #include <sqlite3.h>
 #include <wx/listctrl.h>
+#include "base_class.h"
 
 class MyApp : public wxApp{
 public:
@@ -9,7 +10,7 @@ public:
 
 wxIMPLEMENT_APP(MyApp);
 
-class Start_Frame : public wxFrame{
+class Start_Frame : public wxFrame, public Base_Class{
 public:
     wxTextCtrl* m_findBD;
 
@@ -20,7 +21,6 @@ public:
     void OnEditBD(wxCommandEvent& event);
     void OnDelBd(wxCommandEvent& event);
 private:
-    sqlite3* m_bd;
     wxListCtrl* m_list;
     wxChoice* m_table_choice;
     wxStaticText* m_dbNameLabel;

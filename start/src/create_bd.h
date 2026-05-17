@@ -1,12 +1,12 @@
 #include <wx/wx.h>
 #include <sqlite3.h>
 #include <wx/listctrl.h>
+#include "base_class.h"
 
-class Create_BD : public wxDialog{
+class Create_BD : public wxDialog, public Base_Class{
 public:
     Create_BD(wxWindow* parent);         //создание самого диалогового окна
 private:
-    sqlite3* m_bd;
     wxListCtrl* m_list_create;
     wxTextCtrl* m_nameBD;                       //поле для ввода названия
     wxTextCtrl* m_pathBD;                       //поле для ввода пути к бд

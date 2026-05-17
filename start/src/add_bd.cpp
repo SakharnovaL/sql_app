@@ -3,7 +3,10 @@
 #include <sqlite3.h>
 #include <wx/listctrl.h>
 
-Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wxDialog(parent, wxID_ANY, wxT("добавление новой записи"), wxDefaultPosition, wxSize(500, 400)), m_bd(bd), m_table_name(table_name), m_id(-1), m_col(){
+Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name) : wxDialog(parent, wxID_ANY, wxT("добавление новой записи"), wxDefaultPosition, wxSize(500, 400)),  m_id(-1), m_col(){
+    set_bd(bd);
+    set_table_name(table_name);
+    
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
 
@@ -40,10 +43,10 @@ Add_New_BD::Add_New_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name
 
 int Add_New_BD::GetNextId(){
     int maxId = 0;
-    wxString sql = wxString::Format("SELECT MAX(id) FROM %s;", m_table_name);
+    wxString sql = wxString::Format("SELECT MAX(id) FROM %s;", get_table_name());
     
     sqlite3_stmt* stmt;
-    if(sqlite3_prepare_v2(m_bd, sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    if(sqlite3_prepare_v2(get_bd(), sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         if(sqlite3_step(stmt) == SQLITE_ROW){
             maxId = sqlite3_column_int(stmt, 0);
         }
@@ -55,16 +58,16 @@ int Add_New_BD::GetNextId(){
 
 void Add_New_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
     AddRecord();
-    m_saved = true;
+    set_succsess(true);
     EndModal(wxID_OK);
 };
 
 void Add_New_BD::LoadTableStruct(){
     m_nextId = GetNextId();
-    wxString col_tab = wxString::Format("PRAGMA table_info(%s);", m_table_name);
+    wxString col_tab = wxString::Format("PRAGMA table_info(%s);", get_table_name());
 
     sqlite3_stmt* stmt;
-    if(sqlite3_prepare_v2(m_bd, col_tab.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    if(sqlite3_prepare_v2(get_bd(), col_tab.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         while(sqlite3_step(stmt) == SQLITE_ROW){
             const char* col_name = (const char*)sqlite3_column_text(stmt, 1);
             if(col_name){
@@ -89,12 +92,12 @@ void Add_New_BD::OnItemActivated(wxListEvent& event){                  //для 
 
     wxString fieldName = m_list_add->GetItemText(row, 0);
     if(fieldName == "id" || fieldName == "ID"){
-        wxMessageBox(wxT("Поле ID генерируется автоматически"), wxT("Информация"), wxOK);
+        show_error(wxT("Поле ID генерируется автоматически"));
         return;
     }
 
     if(col == 0){
-        wxMessageBox(wxT("нельзя редактировать название полей"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("нельзя редактировать название полей"));
         return;
     }
     wxString cur_val = m_list_add->GetItemText(row, 1);
@@ -108,14 +111,14 @@ void Add_New_BD::OnItemActivated(wxListEvent& event){                  //для 
             m_cur_row[data_index] = new_val;
         }
         else{
-        wxMessageBox(wxT("Редактировать можно только поле 'Значение'"), wxT("Информация"), wxOK);
+        show_error(wxT("Редактировать можно только поле 'Значение'"));
         }   
     }
 }
 
 void Add_New_BD::AddRecord(){
     if(m_cur_col.empty()){
-        wxMessageBox(wxT("Нет полей для добавления!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Нет полей для добавления!"));
         return;
     }
 
@@ -148,16 +151,13 @@ void Add_New_BD::AddRecord(){
         val += wxString::Format("'%s'", vals);
     }
 
-    wxString sql = wxString::Format("INSERT INTO %s (%s) VALUES (%s);", m_table_name, col, val);
-    char* err_msg = nullptr;
-    int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
-    if(rc != SQLITE_OK){
-        wxMessageBox(wxString::Format(wxT("Ошибка добавления записи:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK | wxICON_ERROR);
-        sqlite3_free(err_msg);
-        m_saved = false;
+    wxString sql = wxString::Format("INSERT INTO %s (%s) VALUES (%s);", get_table_name(), col, val);
+    if(make_sql(sql, nullptr, nullptr) != true){
+        show_error(wxString::Format(wxT("Ошибка добавления записи:\n%s")));
+        set_succsess(false);
     } 
-    else {
+    else{
         wxMessageBox(wxT("Запись успешно добавлена!"), wxT("Успех"), wxOK | wxICON_INFORMATION);
-        m_saved = true;
+        set_succsess(true);
     }
 }

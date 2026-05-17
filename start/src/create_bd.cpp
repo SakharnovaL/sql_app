@@ -5,7 +5,7 @@
 #include <wx/filename.h>
 #include <vector>
 
-Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 300)), m_bd(nullptr), m_nameBD(nullptr), m_pathBD(nullptr), m_list_create(nullptr){
+Create_BD::Create_BD(wxWindow* parent) : wxDialog(parent, wxID_ANY, wxT("Создание новой бд"), wxDefaultPosition, wxSize(400, 300)), m_nameBD(nullptr), m_pathBD(nullptr), m_list_create(nullptr){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);                                            //создание общего бокса куда запихаем все состовляющие окна
 
@@ -96,7 +96,7 @@ void Create_BD::OnCellEdit(wxListEvent& event){
     int col = event.GetColumn();
     
     if(col == 0){
-        wxMessageBox(wxT("Поле ID генерируется автоматически"), wxT("Информация"), wxOK);
+        show_error(wxT("Поле ID генерируется автоматически"));
         return;
     }
 
@@ -156,7 +156,7 @@ void Create_BD::OnCellEdit(wxListEvent& event){
         wxString fieldName = fieldList->GetItemText(r, 0);
         
         if(fieldName == "id" || fieldName == "ID"){
-            wxMessageBox(wxT("Поле ID нельзя редактировать!"), wxT("Информация"), wxOK);
+            show_error(wxT("Поле ID нельзя редактировать!"));
             return;
         }
 
@@ -180,7 +180,7 @@ void Create_BD::OnCellEdit(wxListEvent& event){
             }
             
             if(fieldName == "id" || fieldName == "ID"){
-                continue;  // ПРОПУСКАЕМ ID
+                continue;
             }
             
             wxString newValue = fieldList->GetItemText(c, 1);
@@ -193,7 +193,7 @@ void Create_BD::OnCellEdit(wxListEvent& event){
 void Create_BD::OnColEdit(wxListEvent& event){
     int col = event.GetColumn();
     if(col == 0){
-        wxMessageBox(wxT("Нельзя переименовать колонку ID!"), wxT("Предупреждение"), wxOK);
+        show_error(wxT("Нельзя переименовать колонку ID!"));
         return;
     }
 
@@ -256,9 +256,9 @@ bool Create_BD::CreateBD(){
     wxString full_path = wxString::Format("%s/%s.db", bd_path, bd_name);
     wxString table_name = wxT("my_table");
     
-    int rc = sqlite3_open(full_path.ToUTF8(), &m_bd);
-    if(rc != SQLITE_OK){
-        wxMessageBox(wxString::Format(wxT("Ошибка создания БД: %s"), wxString::FromUTF8(sqlite3_errmsg(m_bd))), wxT("Ошибка"), wxOK);
+    //int rc = open_bd(full_path);
+    if(open_bd(full_path) == false){
+        show_error(wxString::Format(wxT("Ошибка создания БД: %s"), full_path));
         return false;
     }
     
@@ -268,8 +268,8 @@ bool Create_BD::CreateBD(){
     auto data = GetTableData();
 
     if(columns.empty()){
-        wxMessageBox(wxT("Нет колонок для создания таблицы!"), wxT("Ошибка"), wxOK);
-        sqlite3_close(m_bd);
+        show_error(wxT("Нет колонок для создания таблицы!"));
+        close_bd();
         return false;
     }
 
@@ -279,13 +279,18 @@ bool Create_BD::CreateBD(){
     }
     sql += ");";
 
-    char* err_msg = nullptr;
-    rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
-    if(rc != SQLITE_OK){
-        wxMessageBox(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK);
-        sqlite3_free(err_msg);
-        sqlite3_close(m_bd);
+    //char* err_msg = nullptr;
+    //rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
+    if(make_sql(sql, nullptr, nullptr) != true){
+        show_error(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), sql));
+        close_bd();
         return false;
+    }
+
+    if(data.empty()){
+        wxMessageBox(wxString::Format(wxT("База данных успешно создана!\n\nФайл: %s\nКолонок: %d\nЗаписей: 0"), full_path, (int)columns.size()), wxT("Успех"), wxOK);
+        close_bd();
+        return true;
     }
 
     wxString col_list;
@@ -312,10 +317,9 @@ bool Create_BD::CreateBD(){
         }
 
         wxString insert_sql = wxString::Format("INSERT INTO %s (%s) VALUES (%s);", table_name, col_list, values);
-        rc = sqlite3_exec(m_bd, insert_sql.ToUTF8(), nullptr, nullptr, &err_msg);
-        if(rc != SQLITE_OK){
-            wxMessageBox(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK);
-            sqlite3_free(err_msg);
+        //rc = sqlite3_exec(m_bd, insert_sql.ToUTF8(), nullptr, nullptr, &err_msg);
+        if(make_sql(insert_sql, nullptr, nullptr) != true){
+            show_error(wxString::Format(wxT("Ошибка создания таблицы:\n%s"), insert_sql));
         }
     }
 

@@ -541,4 +541,5 @@ CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:\devel\start\src\add_bd.cpp \
  C:/dev/wx/include/wx/msw/mdi.h C:/msys64/ucrt64/include/sqlite3.h \
  C:/dev/wx/include/wx/listctrl.h C:/dev/wx/include/wx/listbase.h \
  C:/dev/wx/include/wx/itemattr.h C:/dev/wx/include/wx/systhemectrl.h \
- C:/dev/wx/include/wx/withimages.h C:/dev/wx/include/wx/msw/listctrl.h
+ C:/dev/wx/include/wx/withimages.h C:/dev/wx/include/wx/msw/listctrl.h \
+ C:\devel\start\src\base_class.h

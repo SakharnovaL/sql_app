@@ -62,7 +62,7 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
             info += wxT("создана: ") + fileInfo.GetModificationTime().Format("%d-%m-%Y %H:%M:%S") + "\n";
 
             sqlite3* bd = nullptr;
-            if(sqlite3_open(file.ToUTF8(), &bd) == SQLITE_OK){      //открываем бд
+            if(open_bd(file) == true){      //открываем бд
                 sqlite3_stmt* stmt;
                 int table_cnt = 0;
                 if(sqlite3_prepare_v2(bd, "SELECT COUNT(*) FROM sqlite_master WHERE type='table';", -1, &stmt, nullptr) == SQLITE_OK){      //подсчитывает кол-во таблиц в бд
@@ -81,23 +81,23 @@ void Open_BD::OnBrowse(wxCommandEvent& event){                                  
 
 void Open_BD::OnOk(wxCommandEvent& event){                                                 //Получает введённые название и путь Проверяет, что название не пустое Показывает сообщение об успехе Закрывает диалог (EndModal)
     if(m_chooseBD == nullptr){
-        wxMessageBox(wxT("m_chooseBD is NULL!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("m_chooseBD is NULL!"));
         event.Skip(false);
         return;
     }
     wxString dbPath = m_chooseBD->GetValue();   // читаем путь
     
     if(dbPath.IsEmpty()){
-        wxMessageBox(wxT("Введите путь базы данных!"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        show_error(wxT("Введите путь базы данных!"));
         event.Skip(false);
         return;
     }
     
-    m_path = dbPath;
+    m_pathBD = dbPath;
     
     event.Skip(true);
 };
 
 wxString Open_BD::GetSelPath() const{
-    return m_path;
+    return m_pathBD;
 }

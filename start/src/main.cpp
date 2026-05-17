@@ -77,7 +77,7 @@ Start_Frame::Start_Frame(wxWindow* parent, wxString title) : wxFrame(parent, wxI
 
     SetSizeHints(600, 400);
 
-    m_bd = nullptr;
+    m_bd.reset(nullptr);
     m_table_choice->Bind(wxEVT_CHOICE, &Start_Frame::OnTableSelected, this);
 };
 
@@ -124,19 +124,19 @@ void Start_Frame::OnOpenBD(wxCommandEvent& event){
 }
 
 void Start_Frame::OnAddNewBD(wxCommandEvent& event){
-    if(m_bd == nullptr){
+    if(!m_bd){
         show_error(wxT("База данных не открыта!"));
         return;
     }
     wxString table_name = m_table_choice->GetString(event.GetSelection());
-    Add_New_BD dlg(this, m_bd, table_name);                     // создаём диалог
+    Add_New_BD dlg(this, m_bd.get(), table_name);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
         LoadTableData(table_name);
     }
 }
 
 void Start_Frame::OnEditBD(wxCommandEvent& event){
-    if(m_bd == nullptr){
+    if(!m_bd){
         show_error(wxT("База данных не открыта!"));
         return;
     }
@@ -156,15 +156,15 @@ void Start_Frame::OnEditBD(wxCommandEvent& event){
     
     wxString table_name = m_table_choice->GetString(m_table_choice->GetSelection());
     set_table_name(table_name);
-    
-    Edit_BD dlg(this, m_bd, table_name, (int)recordId);
+
+    Edit_BD dlg(this, m_bd.get(), table_name, (int)recordId);
     if(dlg.ShowModal() == wxID_OK){
         LoadTableData(table_name);  // обновляем таблицу
     }
 }
 
 void Start_Frame::OnDelBd(wxCommandEvent& event){
-    if(m_bd == nullptr){
+    if(!m_bd){
         show_error(wxT("База данных не открыта!"));
         return;
     }
@@ -188,7 +188,7 @@ void Start_Frame::OnDelBd(wxCommandEvent& event){
     }
 
     wxString table_name = m_table_choice->GetString(event.GetSelection());
-    Del_BD dlg(this, m_bd, table_name, rec_id);                     // создаём диалог
+    Del_BD dlg(this, m_bd.get(), table_name, rec_id);                     // создаём диалог
     if(dlg.ShowModal() == wxID_OK){                 // показываем его
         LoadTableData(table_name);
     }
@@ -245,7 +245,7 @@ static int DisplayTableCallback(void* data, int arg_c, char** arg_v, char** azCo
 void Start_Frame::LoadTables(){
     m_table_choice->Clear();
 
-    if(m_bd == nullptr){
+    if(!m_bd){
         show_error(wxT("База данных не открыта"));
         return;
     }
@@ -274,7 +274,7 @@ static int get_col_callback(void* data, int arg_c, char** arg_v, char** az_col_n
 }
 
 void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то принимать с клавы*/){
-    if(m_bd == nullptr){
+    if(!m_bd){
         wxMessageBox("m_bd == nullptr", wxT("Ошибка"), wxOK);
         return;
     }

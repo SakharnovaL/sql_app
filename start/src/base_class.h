@@ -3,39 +3,44 @@
 
 #include <wx/wx.h>
 #include <sqlite3.h>
+#include <memory>
 
 class Base_Class{
 protected:
-    sqlite3* m_bd;
+    std::unique_ptr<sqlite3, decltype(&sqlite3_close)> m_bd{nullptr, sqlite3_close};
     wxString m_pathBD;
     wxString m_table_name;
     bool m_success;
 public:
-    Base_Class() : m_bd(nullptr), m_success(false){};
+    Base_Class() : m_bd(nullptr, sqlite3_close), m_success(false){};
 
     virtual bool open_bd(const wxString& path){
         m_pathBD = path;
-        if(sqlite3_open(path.ToUTF8(), &m_bd) == SQLITE_OK){
+        sqlite3* raw_ptr = nullptr;
+        if(sqlite3_open(path.ToUTF8(), &raw_ptr) == SQLITE_OK){
+            m_bd.reset(raw_ptr);
+            m_success = true;
             return true;
         }
         else{
+            m_success = false;
             return false;
         }
     }
 
     void close_bd(){
         if(m_bd != nullptr){
-            sqlite3_close(m_bd);
+            m_bd.reset();
         }
         m_bd = nullptr;
     }
 
-    sqlite3* get_bd() const {return m_bd;}
+    sqlite3* get_bd() const {return m_bd.get();}
     wxString get_bdPath() const {return m_pathBD;}
     wxString get_table_name() const {return m_table_name;}
     bool get_succsess() const {return m_success;}
 
-    void set_bd(sqlite3* bd){m_bd = bd;}
+    void set_bd(sqlite3* bd){m_bd.reset(bd);}
     void set_table_name(const wxString& name){m_table_name = name;}
     void set_succsess(bool succsess){m_success = succsess;}
 
@@ -49,7 +54,7 @@ public:
             return false;
         }
         char* err_msg = nullptr;
-        int rc = sqlite3_exec(m_bd, sql.ToUTF8(), callback, data, &err_msg);
+        int rc = sqlite3_exec(m_bd.get(), sql.ToUTF8(), callback, data, &err_msg);
         if(rc != SQLITE_OK){
             show_error(wxString::FromUTF8(err_msg));
             sqlite3_free(err_msg);

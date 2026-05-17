@@ -111,16 +111,22 @@ void Start_Frame::OpenBD(const wxString& dbPath){
 }
 
 void Start_Frame::OnNewBD(wxCommandEvent& event){
-    Create_BD dlg(this);                     // создаём диалог
-    dlg.ShowModal();
+    wxDialog* dlg = new Create_BD(this);
+    dlg->ShowModal();
+    delete dlg;
 }
 
 void Start_Frame::OnOpenBD(wxCommandEvent& event){
-    Open_BD dlg(this);                              // создаём диалог
-    if(dlg.ShowModal() == wxID_OK){                 // показываем его
-        wxString path = dlg.GetSelPath();
-        OpenBD(path);
+    wxDialog* dlg = new Open_BD(this);
+    if(dlg->ShowModal() == wxID_OK){
+        // Downcast: wxDialog -> Open_BD для доступа к GetSelPath()
+        Open_BD* openDlg = dynamic_cast<Open_BD*>(dlg);
+        if(openDlg) {
+            wxString path = openDlg->GetSelPath();
+            OpenBD(path);
+        }
     }
+    delete dlg;
 }
 
 void Start_Frame::OnAddNewBD(wxCommandEvent& event){

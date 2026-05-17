@@ -3,6 +3,10 @@
 
 #include <wx/wx.h>
 #include <sqlite3.h>
+#include <wx/filename.h>
+#include <wx/bitmap.h>
+#include <wx/artprov.h>
+#include <wx/button.h>
 #include <memory>
 
 class Base_Class{
@@ -44,8 +48,48 @@ public:
     void set_table_name(const wxString& name){m_table_name = name;}
     void set_succsess(bool succsess){m_success = succsess;}
 
-    void show_error(const wxString& err_msg){
-        wxMessageBox(err_msg, wxT("Ошибка"), wxOK | wxICON_ERROR);
+    void show_error(const wxString& err_msg, const wxString& title = wxT("Ошибка"), const wxString& icon_path = wxT("C:/devel/icons8-error-48.png")){
+        wxDialog error_dlg(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(300, 150));
+        
+        wxPanel* panel = new wxPanel(&error_dlg, wxID_ANY);
+        wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
+        wxBoxSizer* content_sizer = new wxBoxSizer(wxHORIZONTAL);
+        
+        // Загрузка и отображение иконки
+        if(!icon_path.IsEmpty() && wxFileName::FileExists(icon_path)){
+            wxBitmap bitmap(icon_path, wxBITMAP_TYPE_PNG);
+            if(bitmap.IsOk()){
+                wxStaticBitmap* icon = new wxStaticBitmap(panel, wxID_ANY, bitmap);
+                content_sizer->Add(icon, 0, wxALL | wxALIGN_CENTER, 10);
+            }
+        }
+        else{
+            // Стандартная иконка ошибки, если путь не указан
+            wxBitmap default_bmp = wxArtProvider::GetBitmap(wxART_ERROR, wxART_MESSAGE_BOX);
+            wxStaticBitmap* icon = new wxStaticBitmap(panel, wxID_ANY, default_bmp);
+            content_sizer->Add(icon, 0, wxALL | wxALIGN_CENTER, 10);
+        }
+        
+        // Текст ошибки
+        wxStaticText* text = new wxStaticText(panel, wxID_ANY, err_msg);
+        text->Wrap(350);
+        text->SetForegroundColour(wxColour(200, 0, 0));
+        wxFont font = text->GetFont();
+        font.SetPointSize(10);
+        text->SetFont(font);
+        content_sizer->Add(text, 1, wxALL | wxALIGN_CENTER_VERTICAL, 10);
+        
+        main_sizer->Add(content_sizer, 1, wxEXPAND | wxALL, 10);
+        
+        // Кнопка OK
+        wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("OK"));
+        wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
+        btn_sizer->Add(ok_btn, 0, wxALL | wxALIGN_CENTER, 10);
+        main_sizer->Add(btn_sizer, 0, wxALIGN_CENTER);
+        
+        panel->SetSizer(main_sizer);
+        error_dlg.SetMinSize(wxSize(400, 150));
+        error_dlg.ShowModal();
     }
 
     bool make_sql(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){

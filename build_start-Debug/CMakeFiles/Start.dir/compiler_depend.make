@@ -12,6 +12,7 @@ CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:/devel/start/src/add_bd.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -36,6 +37,7 @@ CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:/devel/start/src/add_bd.cpp \
   C:/dev/wx/include/wx/compositewin.h \
   C:/dev/wx/include/wx/containr.h \
   C:/dev/wx/include/wx/control.h \
+  C:/dev/wx/include/wx/convauto.h \
   C:/dev/wx/include/wx/cpp.h \
   C:/dev/wx/include/wx/ctrlsub.h \
   C:/dev/wx/include/wx/cursor.h \
@@ -55,8 +57,10 @@ CMakeFiles/Start.dir/src/add_bd.cpp.obj: C:/devel/start/src/add_bd.cpp \
   C:/dev/wx/include/wx/event.h \
   C:/dev/wx/include/wx/eventfilter.h \
   C:/dev/wx/include/wx/features.h \
+  C:/dev/wx/include/wx/file.h \
   C:/dev/wx/include/wx/filedlg.h \
   C:/dev/wx/include/wx/filefn.h \
+  C:/dev/wx/include/wx/filename.h \
   C:/dev/wx/include/wx/flags.h \
   C:/dev/wx/include/wx/font.h \
   C:/dev/wx/include/wx/fontenc.h \
@@ -727,6 +731,7 @@ CMakeFiles/Start.dir/src/create_bd.cpp.obj: C:/devel/start/src/create_bd.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -1445,6 +1450,7 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -1469,6 +1475,7 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/dev/wx/include/wx/compositewin.h \
   C:/dev/wx/include/wx/containr.h \
   C:/dev/wx/include/wx/control.h \
+  C:/dev/wx/include/wx/convauto.h \
   C:/dev/wx/include/wx/cpp.h \
   C:/dev/wx/include/wx/ctrlsub.h \
   C:/dev/wx/include/wx/cursor.h \
@@ -1488,8 +1495,10 @@ CMakeFiles/Start.dir/src/del_bd.cpp.obj: C:/devel/start/src/del_bd.cpp \
   C:/dev/wx/include/wx/event.h \
   C:/dev/wx/include/wx/eventfilter.h \
   C:/dev/wx/include/wx/features.h \
+  C:/dev/wx/include/wx/file.h \
   C:/dev/wx/include/wx/filedlg.h \
   C:/dev/wx/include/wx/filefn.h \
+  C:/dev/wx/include/wx/filename.h \
   C:/dev/wx/include/wx/flags.h \
   C:/dev/wx/include/wx/font.h \
   C:/dev/wx/include/wx/fontenc.h \
@@ -2162,6 +2171,7 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -2186,6 +2196,7 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp \
   C:/dev/wx/include/wx/compositewin.h \
   C:/dev/wx/include/wx/containr.h \
   C:/dev/wx/include/wx/control.h \
+  C:/dev/wx/include/wx/convauto.h \
   C:/dev/wx/include/wx/cpp.h \
   C:/dev/wx/include/wx/ctrlsub.h \
   C:/dev/wx/include/wx/cursor.h \
@@ -2205,8 +2216,10 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:/devel/start/src/edit_bd.cpp \
   C:/dev/wx/include/wx/event.h \
   C:/dev/wx/include/wx/eventfilter.h \
   C:/dev/wx/include/wx/features.h \
+  C:/dev/wx/include/wx/file.h \
   C:/dev/wx/include/wx/filedlg.h \
   C:/dev/wx/include/wx/filefn.h \
+  C:/dev/wx/include/wx/filename.h \
   C:/dev/wx/include/wx/flags.h \
   C:/dev/wx/include/wx/font.h \
   C:/dev/wx/include/wx/fontenc.h \
@@ -2877,6 +2890,7 @@ CMakeFiles/Start.dir/src/main.cpp.obj: C:/devel/start/src/main.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -3600,6 +3614,7 @@ CMakeFiles/Start.dir/src/open_bd.cpp.obj: C:/devel/start/src/open_bd.cpp \
   C:/dev/wx/include/wx/anystr.h \
   C:/dev/wx/include/wx/app.h \
   C:/dev/wx/include/wx/arrstr.h \
+  C:/dev/wx/include/wx/artprov.h \
   C:/dev/wx/include/wx/atomic.h \
   C:/dev/wx/include/wx/beforestd.h \
   C:/dev/wx/include/wx/bitmap.h \
@@ -4330,6 +4345,8 @@ C:/msys64/ucrt64/include/c++/14.2.0/tr1/ell_integral.tcc:
 
 C:/dev/wx/include/wx/msw/window.h:
 
+C:/dev/wx/include/wx/file.h:
+
 C:/dev/wx/include/wx/dcclient.h:
 
 C:/dev/wx/include/wx/msw/radiobox.h:
@@ -4346,10 +4363,6 @@ C:/dev/wx/include/wx/access.h:
 
 C:/msys64/ucrt64/include/c++/14.2.0/bits/stl_raw_storage_iter.h:
 
-C:/msys64/ucrt64/include/ncrypt.h:
-
-C:/dev/wx/include/wx/generic/choicdgg.h:
-
 C:/msys64/ucrt64/include/c++/14.2.0/bits/uniform_int_dist.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/tmmintrin.h:
@@ -4357,10 +4370,6 @@ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/tmmintrin.h:
 C:/dev/wx/include/wx/affinematrix2d.h:
 
 C:/dev/wx/include/wx/bitmap.h:
-
-C:/msys64/ucrt64/include/winscard.h:
-
-C:/msys64/ucrt64/include/pthread_signal.h:
 
 C:/dev/wx/include/wx/afterstd.h:
 
@@ -4391,6 +4400,14 @@ C:/dev/wx/include/wx/buffer.h:
 C:/msys64/ucrt64/include/basetsd.h:
 
 C:/dev/wx/include/wx/arrstr.h:
+
+C:/dev/wx/include/wx/language.h:
+
+C:/dev/wx/include/wx/cursor.h:
+
+C:/msys64/ucrt64/include/pthread.h:
+
+C:/dev/wx/include/wx/artprov.h:
 
 C:/msys64/ucrt64/include/unknwn.h:
 
@@ -4454,6 +4471,12 @@ C:/dev/wx/include/wx/datetime.h:
 
 C:/dev/wx/include/wx/settings.h:
 
+C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/hresetintrin.h:
+
+C:/msys64/ucrt64/include/c++/14.2.0/bits/shared_ptr_atomic.h:
+
+C:/dev/wx/include/wx/convauto.h:
+
 C:/msys64/ucrt64/include/oaidl.h:
 
 C:/dev/wx/include/wx/checkbox.h:
@@ -4498,9 +4521,7 @@ C:/dev/wx/include/wx/ctrlsub.h:
 
 C:/dev/wx/include/wx/dcscreen.h:
 
-C:/dev/wx/include/wx/language.h:
-
-C:/dev/wx/include/wx/cursor.h:
+C:/dev/wx/include/wx/filename.h:
 
 C:/dev/wx/include/wx/strconv.h:
 
@@ -4571,6 +4592,10 @@ C:/dev/wx/include/wx/gauge.h:
 C:/dev/wx/include/wx/gdicmn.h:
 
 C:/dev/wx/include/wx/gdiobj.h:
+
+C:/msys64/ucrt64/include/ncrypt.h:
+
+C:/dev/wx/include/wx/generic/choicdgg.h:
 
 C:/dev/wx/include/wx/generic/msgdlgg.h:
 
@@ -5248,10 +5273,6 @@ C:/msys64/ucrt64/include/c++/14.2.0/bits/requires_hosted.h:
 
 C:/msys64/ucrt64/include/c++/14.2.0/bits/shared_ptr.h:
 
-C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/hresetintrin.h:
-
-C:/msys64/ucrt64/include/c++/14.2.0/bits/shared_ptr_atomic.h:
-
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/waitpkgintrin.h:
 
 C:/msys64/ucrt64/include/stringapiset.h:
@@ -5490,9 +5511,11 @@ C:/msys64/ucrt64/include/pshpack2.h:
 
 C:/msys64/ucrt64/include/pshpack4.h:
 
-C:/msys64/ucrt64/include/pthread.h:
-
 C:/msys64/ucrt64/include/pthread_compat.h:
+
+C:/msys64/ucrt64/include/winscard.h:
+
+C:/msys64/ucrt64/include/pthread_signal.h:
 
 C:/msys64/ucrt64/include/pthread_time.h:
 
@@ -5751,12 +5774,6 @@ C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xsavesintrin.h:
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/xtestintrin.h:
 
 C:/devel/start/src/add_bd.h:
-
-C:/dev/wx/include/wx/convauto.h:
-
-C:/dev/wx/include/wx/file.h:
-
-C:/dev/wx/include/wx/filename.h:
 
 C:/devel/start/src/del_bd.cpp:
 

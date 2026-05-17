@@ -542,7 +542,8 @@ CMakeFiles/Start.dir/src/main.cpp.obj: C:\devel\start\src\main.cpp \
  C:/dev/wx/include/wx/listbase.h C:/dev/wx/include/wx/itemattr.h \
  C:/dev/wx/include/wx/systhemectrl.h C:/dev/wx/include/wx/withimages.h \
  C:/dev/wx/include/wx/msw/listctrl.h C:\devel\start\src\base_class.h \
+ C:/dev/wx/include/wx/filename.h C:/dev/wx/include/wx/file.h \
+ C:/dev/wx/include/wx/convauto.h C:/dev/wx/include/wx/artprov.h \
  C:\devel\start\src\open_bd.h C:\devel\start\src\edit_bd.h \
  C:\devel\start\src\del_bd.h C:\devel\start\src\add_bd.h \
- C:\devel\start\src\create_bd.h C:/dev/wx/include/wx/filename.h \
- C:/dev/wx/include/wx/file.h C:/dev/wx/include/wx/convauto.h
+ C:\devel\start\src\create_bd.h

@@ -201,7 +201,19 @@ void Start_Frame::OnDelBd(wxCommandEvent& event){
 }
 
 bool MyApp::OnInit(){
-    Start_Frame* frame = new Start_Frame(NULL);          
+    wxLog::EnableLogging(false);
+    wxLog::SetVerbose(false);
+
+    Start_Frame* frame = new Start_Frame(NULL);  
+    
+    wxIcon icon;
+    if(icon.LoadFile(wxT("C:/devel/icons8-шаблон-48.png"), wxBITMAP_TYPE_ICO)){
+        frame->SetIcon(icon);
+    }
+    else if(icon.LoadFile(wxT("C:/devel/icons8-шаблон-48.png"), wxBITMAP_TYPE_PNG)){
+        frame->SetIcon(icon);
+    }
+
     frame->Show(true);
     return true;
 }

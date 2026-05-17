@@ -87,32 +87,37 @@ void Add_New_BD::LoadTableStruct(){
 }
 
 void Add_New_BD::OnItemActivated(wxListEvent& event){                  //для двойного нажатия
-    int row = event.GetIndex();
-    int col = event.GetColumn();
+    try{
+        int row = event.GetIndex();
+        int col = event.GetColumn();
 
-    wxString fieldName = m_list_add->GetItemText(row, 0);
-    if(fieldName == "id" || fieldName == "ID"){
-        show_error(wxT("Поле ID генерируется автоматически"));
-        return;
-    }
-
-    if(col == 0){
-        show_error(wxT("нельзя редактировать название полей"));
-        return;
-    }
-    wxString cur_val = m_list_add->GetItemText(row, 1);
-    wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), fieldName), wxT("Редактирование"), cur_val);
-    if(dlg.ShowModal() == wxID_OK){
-        wxString new_val = dlg.GetValue();
-        m_list_add->SetItem(row, 1, new_val);
-
-        int data_index = row - 1;
-        if(data_index >= 0 && data_index< (int)m_cur_row.size()){
-            m_cur_row[data_index] = new_val;
+        wxString fieldName = m_list_add->GetItemText(row, 0);
+        if(fieldName == "id" || fieldName == "ID"){
+            show_error(wxT("Поле ID генерируется автоматически"));
+            return;
         }
-        else{
-        show_error(wxT("Редактировать можно только поле 'Значение'"));
-        }   
+
+        if(col == 0){
+            show_error(wxT("нельзя редактировать название полей"));
+            return;
+        }
+        wxString cur_val = m_list_add->GetItemText(row, 1);
+        wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), fieldName), wxT("Редактирование"), cur_val);
+        if(dlg.ShowModal() == wxID_OK){
+            wxString new_val = dlg.GetValue();
+            m_list_add->SetItem(row, 1, new_val);
+
+            int data_index = row - 1;
+            if(data_index >= 0 && data_index< (int)m_cur_row.size()){
+                m_cur_row[data_index] = new_val;
+            }
+            else{
+            show_error(wxT("Редактировать можно только поле 'Значение'"));
+            }   
+        }
+    }
+    catch(const std::exception& e){
+        show_error(wxString::Format(wxT("Ошибка: %s"), wxString::FromUTF8(e.what())));
     }
 }
 

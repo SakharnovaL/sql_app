@@ -167,27 +167,32 @@ void Edit_BD::SaveRecord(){
 }
 
 void Edit_BD::OnItemActivated(wxListEvent& event){                  //для двойного нажатия
-    int row = event.GetIndex();
-    int col = event.GetColumn();
+    try{
+        int row = event.GetIndex();
+        int col = event.GetColumn();
 
-    wxString fieldName = m_cur_col[row];
-    if(fieldName == "id" || fieldName == "ID"){
-        show_error(wxT("Поле ID нельзя редактировать!"));
-        return;
-    }
-
-    if(col == 1){
-        show_error(wxT("нельзя редактировать название полей"));
-        return;
-    }
-    wxString cur_val = m_list_edit->GetItemText(row, 1);
-    wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), m_cur_col[row]), wxT("Редактирование"), cur_val);
-    if(dlg.ShowModal() == wxID_OK){
-        wxString new_val = dlg.GetValue();
-        m_list_edit->SetItem(row, 1, new_val);
-
-        if(row >= 0 && row < (int)m_cur_row.size()){
-            m_cur_row[row] = new_val;
+        wxString fieldName = m_cur_col[row];
+        if(fieldName == "id" || fieldName == "ID"){
+            show_error(wxT("Поле ID нельзя редактировать!"));
+            return;
         }
+
+        if(col == 1){
+            show_error(wxT("нельзя редактировать название полей"));
+            return;
+        }
+        wxString cur_val = m_list_edit->GetItemText(row, 1);
+        wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), m_cur_col[row]), wxT("Редактирование"), cur_val);
+        if(dlg.ShowModal() == wxID_OK){
+            wxString new_val = dlg.GetValue();
+            m_list_edit->SetItem(row, 1, new_val);
+
+            if(row >= 0 && row < (int)m_cur_row.size()){
+                m_cur_row[row] = new_val;
+            }
+        }
+    }
+    catch(const std::exception& e){
+        show_error(wxString::Format(wxT("Ошибка: %s"), wxString::FromUTF8(e.what())));
     }
 }

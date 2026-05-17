@@ -15,8 +15,13 @@ protected:
     wxString m_pathBD;
     wxString m_table_name;
     bool m_success;
+    bool m_isolated;  // Флаг изоляции
+    
 public:
-    Base_Class() : m_bd(nullptr, sqlite3_close), m_success(false){};
+    Base_Class() : m_bd(nullptr, sqlite3_close), m_success(false), m_isolated(false){};
+    
+    // Конструктор для изолированных диалогов
+    Base_Class(bool isolated) : m_bd(nullptr, sqlite3_close), m_success(false), m_isolated(isolated){};
 
     virtual bool open_bd(const wxString& path){
         m_pathBD = path;
@@ -33,10 +38,10 @@ public:
     }
 
     void close_bd(){
-        if(m_bd != nullptr){
+        if(m_bd){
             m_bd.reset();
+            m_success = false;
         }
-        m_bd = nullptr;
     }
 
     sqlite3* get_bd() const {return m_bd.get();}
@@ -44,18 +49,28 @@ public:
     wxString get_table_name() const {return m_table_name;}
     bool get_succsess() const {return m_success;}
 
-    void set_bd(sqlite3* bd){m_bd.reset(bd);}
-    void set_table_name(const wxString& name){m_table_name = name;}
+    void set_bd(sqlite3* bd){
+        if(m_bd.get() != bd){
+            m_bd.reset(bd);
+        }
+    }
+    
+    void set_table_name(const wxString& name){
+        if(!m_isolated){  // Только не изолированные объекты могут изменять имя
+            m_table_name = name;
+        }
+    }
+    
     void set_succsess(bool succsess){m_success = succsess;}
 
-    void show_error(const wxString& err_msg, const wxString& title = wxT("Ошибка"), const wxString& icon_path = wxT("C:/devel/icons8-error-48.png")){
-        wxDialog error_dlg(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(300, 150));
+    void show_error(const wxString& err_msg, const wxString& title = wxT("Ошибка"), 
+                    const wxString& icon_path = wxT("C:/devel/icons8-error-48.png")){
+        wxDialog error_dlg(nullptr, wxID_ANY, title, wxDefaultPosition, wxSize(500, 150));
         
         wxPanel* panel = new wxPanel(&error_dlg, wxID_ANY);
         wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
         wxBoxSizer* content_sizer = new wxBoxSizer(wxHORIZONTAL);
         
-        // Загрузка и отображение иконки
         if(!icon_path.IsEmpty() && wxFileName::FileExists(icon_path)){
             wxBitmap bitmap(icon_path, wxBITMAP_TYPE_PNG);
             if(bitmap.IsOk()){
@@ -64,13 +79,11 @@ public:
             }
         }
         else{
-            // Стандартная иконка ошибки, если путь не указан
             wxBitmap default_bmp = wxArtProvider::GetBitmap(wxART_ERROR, wxART_MESSAGE_BOX);
             wxStaticBitmap* icon = new wxStaticBitmap(panel, wxID_ANY, default_bmp);
             content_sizer->Add(icon, 0, wxALL | wxALIGN_CENTER, 10);
         }
         
-        // Текст ошибки
         wxStaticText* text = new wxStaticText(panel, wxID_ANY, err_msg);
         text->Wrap(350);
         text->SetForegroundColour(wxColour(200, 0, 0));
@@ -81,7 +94,6 @@ public:
         
         main_sizer->Add(content_sizer, 1, wxEXPAND | wxALL, 10);
         
-        // Кнопка OK
         wxButton* ok_btn = new wxButton(panel, wxID_OK, wxT("OK"));
         wxBoxSizer* btn_sizer = new wxBoxSizer(wxHORIZONTAL);
         btn_sizer->Add(ok_btn, 0, wxALL | wxALIGN_CENTER, 10);
@@ -93,23 +105,40 @@ public:
     }
 
     bool make_sql(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){
-        if(m_bd == nullptr){
+        if(!m_bd){
             show_error(wxT("База данных не открыта!"));
             return false;
         }
         char* err_msg = nullptr;
         int rc = sqlite3_exec(m_bd.get(), sql.ToUTF8(), callback, data, &err_msg);
         if(rc != SQLITE_OK){
-            show_error(wxString::FromUTF8(err_msg));
+            wxString error_msg = wxString::FromUTF8(err_msg);
+            show_error(wxString::Format(wxT("SQL ошибка: %s"), error_msg));
             sqlite3_free(err_msg);
             return false;
         }
         return true;
     }
 
-    bool operator()(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){return make_sql(sql, callback, data);}
-    wxString operator+(const wxString& sql_part) const {return wxString::Format("SELECT * FROM %s %s", m_table_name, sql_part);}
+    bool operator()(const wxString& sql, int (*callback)(void*, int, char**, char**) = nullptr, void* data = nullptr){
+        return make_sql(sql, callback, data);
+    }
+    
+    wxString operator+(const wxString& sql_part) const {
+        if(m_table_name.IsEmpty()){
+            return wxT("");
+        }
+        if(sql_part.IsEmpty()){
+            return wxString::Format("SELECT * FROM %s", m_table_name);
+        }
+        return wxString::Format("SELECT * FROM %s %s", m_table_name, sql_part);
+    }
+    
     bool operator-(int id){
+        if(m_table_name.IsEmpty()){
+            show_error(wxT("Имя таблицы не установлено для удаления"));
+            return false;
+        }
         wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d", m_table_name, id);
         return make_sql(sql);
     }

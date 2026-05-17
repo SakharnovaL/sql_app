@@ -2,12 +2,13 @@
 #include <sqlite3.h>
 #include <wx/listctrl.h>
 #include <vector>
-#include "base_class.h"
 
-class Edit_BD : public wxDialog, public Base_Class{
+class Edit_BD : public wxDialog{
 public:
     Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int record_id);
 private:
+    sqlite3* m_bd;
+    const wxString m_table_name;
     int m_id;
     int m_col;
     wxTextCtrl* m_name;

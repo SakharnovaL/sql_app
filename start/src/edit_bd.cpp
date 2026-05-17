@@ -4,10 +4,7 @@
 #include "edit_bd.h"
 
 
-Edit_BD::Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int record_id) : wxDialog(parent, wxID_ANY, wxT("редактирование записи"), wxDefaultPosition, wxSize(400, 300)), m_id(record_id), m_col(){
-    set_bd(bd);
-    set_table_name(table_name);
-    
+Edit_BD::Edit_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int record_id) : wxDialog(parent, wxID_ANY, wxT("редактирование записи"), wxDefaultPosition, wxSize(400, 300)), m_bd(bd), m_table_name(table_name), m_id(record_id), m_col(){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     wxBoxSizer* main_sizer = new wxBoxSizer(wxVERTICAL);
     
@@ -46,10 +43,10 @@ void Edit_BD::OnOk(wxCommandEvent& event){                                      
 };
 
 void Edit_BD::LoadTableStruct(){
-    wxString col_tab = wxString::Format("PRAGMA table_info(%s);", get_table_name());
+    wxString col_tab = wxString::Format("PRAGMA table_info(%s);", m_table_name);
 
     sqlite3_stmt* stmt;
-    if(sqlite3_prepare_v2(get_bd(), col_tab.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    if(sqlite3_prepare_v2(m_bd, col_tab.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         while(sqlite3_step(stmt) == SQLITE_ROW){
             const char* col_name = (const char*)sqlite3_column_text(stmt, 1);
             if(col_name){
@@ -60,8 +57,8 @@ void Edit_BD::LoadTableStruct(){
         sqlite3_finalize(stmt);
     }
 
-    wxString countSql = wxString::Format("SELECT COUNT(*) FROM %s;", get_table_name());
-    if(sqlite3_prepare_v2(get_bd(), countSql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    wxString countSql = wxString::Format("SELECT COUNT(*) FROM %s;", m_table_name);
+    if(sqlite3_prepare_v2(m_bd, countSql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         if(sqlite3_step(stmt) == SQLITE_ROW){
             m_col = sqlite3_column_int(stmt, 0);
         }
@@ -70,15 +67,15 @@ void Edit_BD::LoadTableStruct(){
 }
 
 void Edit_BD::LoadRecord(int id){
-    if(get_bd() == nullptr){
-        show_error(wxT("LoadTables: m_bd == nullptr"));
+    if(m_bd == nullptr){
+        wxMessageBox(wxT("LoadTables: m_bd == nullptr"), wxT("Ошибка"), wxOK | wxICON_ERROR);
         return;
     }
 
     if(id == -1){
-        wxString count_sql = wxString::Format("SELECT MIN(rowid) FROM %s", get_table_name());
+        wxString count_sql = wxString::Format("SELECT MIN(rowid) FROM %s", m_table_name);
         sqlite3_stmt* stmt;                                                                     //указатель на заготовленный sql запрос, сюда записывается результат sql запроса
-        if(sqlite3_prepare_v2(get_bd(), count_sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+        if(sqlite3_prepare_v2(m_bd, count_sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
             if(sqlite3_step(stmt) == SQLITE_ROW){
                 id = sqlite3_column_int(stmt, 0);
             }
@@ -97,11 +94,10 @@ void Edit_BD::LoadRecord(int id){
     m_list_edit->DeleteAllItems();
     m_cur_row.clear();
 
-    set_table_name(get_table_name());
-    wxString sql = *this + wxString::Format("WHERE rowid = %d;", id);
+    wxString sql = wxString::Format("SELECT * FROM %s WHERE rowid = %d;", m_table_name, id);
 
     sqlite3_stmt* stmt;
-    if(sqlite3_prepare_v2(get_bd(), sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+    if(sqlite3_prepare_v2(m_bd, sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
         if(sqlite3_step(stmt) == SQLITE_ROW){
             int col_cnt = sqlite3_column_count(stmt);
 
@@ -127,7 +123,7 @@ void Edit_BD::LoadRecord(int id){
             }
         }
         else{
-            show_error(wxString::Format(wxT("Запись с ID %d не найдена"), id));
+            wxMessageBox(wxString::Format(wxT("Запись с ID %d не найдена"), id), wxT("Ошибка"), wxOK | wxICON_ERROR);
         }
         sqlite3_finalize(stmt);
     }
@@ -142,7 +138,7 @@ void Edit_BD::SaveRecord(){
     for(size_t i = 0; i < m_cur_col.size(); i ++){
         wxString col_name = m_cur_col[i];
         if(col_name == "id" || col_name == "ID"){
-            continue;  
+            continue;  // пропускаем ID
         }
 
         if(i < m_cur_row.size()){
@@ -156,9 +152,11 @@ void Edit_BD::SaveRecord(){
     }
 
     wxString sql = wxString::Format("UPDATE %s SET %s WHERE rowid = %d;", m_table_name, set_change, m_id);
-    
-    if((*this)(sql, nullptr, nullptr) != true){
-        show_error(wxString::Format(wxT("Ошибка сохранения:\n%s")));
+    char* err_msg = nullptr;
+    int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
+    if(rc != SQLITE_OK){
+        wxMessageBox(wxString::Format(wxT("Ошибка сохранения:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        sqlite3_free(err_msg);
     }
     else{
         wxMessageBox(wxT("Запись успешно сохранена!"), wxT("Успех"), wxOK | wxICON_INFORMATION);
@@ -167,32 +165,27 @@ void Edit_BD::SaveRecord(){
 }
 
 void Edit_BD::OnItemActivated(wxListEvent& event){                  //для двойного нажатия
-    try{
-        int row = event.GetIndex();
-        int col = event.GetColumn();
+    int row = event.GetIndex();
+    int col = event.GetColumn();
 
-        wxString fieldName = m_cur_col[row];
-        if(fieldName == "id" || fieldName == "ID"){
-            show_error(wxT("Поле ID нельзя редактировать!"));
-            return;
-        }
-
-        if(col == 1){
-            show_error(wxT("нельзя редактировать название полей"));
-            return;
-        }
-        wxString cur_val = m_list_edit->GetItemText(row, 1);
-        wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), m_cur_col[row]), wxT("Редактирование"), cur_val);
-        if(dlg.ShowModal() == wxID_OK){
-            wxString new_val = dlg.GetValue();
-            m_list_edit->SetItem(row, 1, new_val);
-
-            if(row >= 0 && row < (int)m_cur_row.size()){
-                m_cur_row[row] = new_val;
-            }
-        }
+    wxString fieldName = m_cur_col[row];
+    if(fieldName == "id" || fieldName == "ID"){
+        wxMessageBox(wxT("Поле ID нельзя редактировать!"), wxT("Информация"), wxOK);
+        return;
     }
-    catch(const std::exception& e){
-        show_error(wxString::Format(wxT("Ошибка: %s"), wxString::FromUTF8(e.what())));
+
+    if(col == 1){
+        wxMessageBox(wxT("нельзя редактировать название полей"), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        return;
+    }
+    wxString cur_val = m_list_edit->GetItemText(row, 1);
+    wxTextEntryDialog dlg(this, wxString::Format(wxT("Изменить значение для '%s':"), m_cur_col[row]), wxT("Редактирование"), cur_val);
+    if(dlg.ShowModal() == wxID_OK){
+        wxString new_val = dlg.GetValue();
+        m_list_edit->SetItem(row, 1, new_val);
+
+        if(row >= 0 && row < (int)m_cur_row.size()){
+            m_cur_row[row] = new_val;
+        }
     }
 }

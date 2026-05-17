@@ -541,6 +541,4 @@ CMakeFiles/Start.dir/src/edit_bd.cpp.obj: C:\devel\start\src\edit_bd.cpp \
  C:\devel\start\src\edit_bd.h C:/dev/wx/include/wx/listctrl.h \
  C:/dev/wx/include/wx/listbase.h C:/dev/wx/include/wx/itemattr.h \
  C:/dev/wx/include/wx/systhemectrl.h C:/dev/wx/include/wx/withimages.h \
- C:/dev/wx/include/wx/msw/listctrl.h C:\devel\start\src\base_class.h \
- C:/dev/wx/include/wx/filename.h C:/dev/wx/include/wx/file.h \
- C:/dev/wx/include/wx/convauto.h C:/dev/wx/include/wx/artprov.h
+ C:/dev/wx/include/wx/msw/listctrl.h

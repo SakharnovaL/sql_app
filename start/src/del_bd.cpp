@@ -5,11 +5,7 @@
 #include <wx/statline.h>
 
 
-Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)), m_id(id){
-    set_bd(bd);
-    set_table_name(table_name);
-    set_succsess(false);
-    
+Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id) : wxDialog(parent, wxID_ANY, wxT("подтверждение удаления"), wxDefaultPosition, wxSize(400, 200)), m_bd(bd), m_table_name(table_name), m_id(id), m_deleted(false){
     wxPanel* panel = new wxPanel(this, wxID_ANY);
     panel->SetBackgroundColour(wxColour(255, 255, 255));
     
@@ -49,7 +45,7 @@ Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id
     wxStaticBox* info_box = new wxStaticBox(panel, wxID_ANY, wxT("Информация о записи"));
     wxStaticBoxSizer* info_box_sizer = new wxStaticBoxSizer(info_box, wxVERTICAL);
     
-    wxString info_text = wxString::Format(wxT("Таблица: %s\nID записи: %d"), get_table_name(), m_id);
+    wxString info_text = wxString::Format(wxT("Таблица: %s\nID записи: %d"), m_table_name, m_id);
     wxStaticText* info_label = new wxStaticText(panel, wxID_ANY, info_text);
     info_label->SetForegroundColour(wxColour(80, 80, 80));
     info_box_sizer->Add(info_label, 0, wxALL | wxALIGN_CENTER, 10);
@@ -96,13 +92,18 @@ Del_BD::Del_BD(wxWindow* parent, sqlite3* bd, const wxString& table_name, int id
 };
 
 void Del_BD::OnDelete(wxCommandEvent& event){
-    if((*this - m_id) == false){
-        show_error(wxString::Format(wxT("Ошибка удаления:\n%s")));
-        set_succsess(false);
+    wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d;", m_table_name, m_id);
+
+    char* err_msg = nullptr;
+    int rc = sqlite3_exec(m_bd, sql.ToUTF8(), nullptr, nullptr, &err_msg);
+    if(rc != SQLITE_OK){
+        wxMessageBox(wxString::Format(wxT("Ошибка удаления:\n%s"), wxString::FromUTF8(err_msg)), wxT("Ошибка"), wxOK | wxICON_ERROR);
+        sqlite3_free(err_msg);
+        m_deleted = false;
         EndModal(wxID_CANCEL);
     }
     else{
-        set_succsess(true);
+        m_deleted = true;
         EndModal(wxID_OK);
     }
 }

@@ -304,6 +304,11 @@ void Start_Frame::LoadTableData(const wxString& table_name/*надо где-то
 
     set_table_name(table_name);
 
+    if(!(!(*this))){
+        show_error(wxString::Format(wxT("Таблица %s не существует!"), table_name));
+        return;
+    }
+
     m_list->ClearAll();
     while(m_list->GetColumnCount() > 0){
         m_list->DeleteColumn(0);

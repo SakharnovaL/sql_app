@@ -134,13 +134,21 @@ public:
         return wxString::Format("SELECT * FROM %s %s", m_table_name, sql_part);
     }
     
-    bool operator-(int id){
-        if(m_table_name.IsEmpty()){
-            show_error(wxT("Имя таблицы не установлено для удаления"));
-            return false;
+    bool operator!() {
+        if(m_table_name.IsEmpty()) return false;
+        
+        wxString sql = wxString::Format("SELECT name FROM sqlite_master WHERE type='table' AND name='%s'", m_table_name);
+        sqlite3_stmt* stmt;
+        bool exists = false;
+        
+        if(sqlite3_prepare_v2(m_bd.get(), sql.ToUTF8(), -1, &stmt, nullptr) == SQLITE_OK){
+            if(sqlite3_step(stmt) == SQLITE_ROW){
+                exists = true;
+            }
+            sqlite3_finalize(stmt);
         }
-        wxString sql = wxString::Format("DELETE FROM %s WHERE rowid = %d", m_table_name, id);
-        return make_sql(sql);
+        
+        return exists;
     }
 };
 
